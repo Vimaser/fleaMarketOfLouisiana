@@ -8,7 +8,6 @@ import '../firebaseConfig';
 const FAQs = () => {
   const [faqs, setFAQs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
