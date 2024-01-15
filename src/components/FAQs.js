@@ -8,6 +8,7 @@ import '../firebaseConfig';
 const FAQs = () => {
   const [faqs, setFAQs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -22,6 +23,7 @@ const FAQs = () => {
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setIsLoggedIn(!!user);
+      // ^^^ ESLint may not detect the usage of isLoggedIn here
       if (user) {
         const db = getFirestore();
         const userDoc = await getDoc(doc(db, "Vendors", user.uid));
