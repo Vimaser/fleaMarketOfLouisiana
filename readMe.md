@@ -217,19 +217,29 @@ Ensure all event-related features are fully functional and bug-free.
 Double-check that all role-based functionalities (like editing blogs, FAQs, etc.) are working correctly.
 Ensure that unauthorized users can't access or perform admin/vendor-specific operations.
 
+***DONE***
+
 6. Start Responsive Design Implementation:
 
 Begin making your website mobile-friendly if not already done.
 Focus on key pages like Home.js and Vendor.js initially.
 
+*not done, but started*
+
 7. Prepare a Testing Plan:
 
 Outline a plan for thorough testing of the website, including functional and responsive design testing.
+
+***DONE***
 
 8. Set Aside Time for Bug Fixes:
 
 Allocate a specific time slot to address any bugs or issues you might encounter.
 
+***DONE*** BUT there's always more bugs somewhere!
+
 9. Document Any New Features or Changes:
 
 Update your project documentation to reflect any new features or significant changes made.
+
+***Working on interactive map, will probably drop because time constraints and general fustration converting an excel map with roughly 500 plus cells into an interactive map with CSS styling and functionality to tell if it's open or not... That and the deadline is by Sunday and this is mainly a bonus feature.

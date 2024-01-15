@@ -1,4 +1,8 @@
 /* Regular Desktop Styles */
+body {
+    background-color: #FFBA24;
+  }
+  
 .home-container {
     font-family: 'Arial', sans-serif;
     padding: 20px;

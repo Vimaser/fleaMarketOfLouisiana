@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import "../firebaseConfig";
 import useUserRole from "./useUserRole";
-import img from "../img/fleabro.gif";
+import img from "../img/fleabro1.gif";
 import "./css/Home.css";
 
 const Home = () => {
