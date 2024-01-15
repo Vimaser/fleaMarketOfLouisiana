@@ -11,7 +11,7 @@ const FAQs = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
-  console.log(isLoggedIn); 
+  console.log("Netlify's ESlint is a pain in the butt", isLoggedIn); 
 
   useEffect(() => {
     const fetchData = async () => {
