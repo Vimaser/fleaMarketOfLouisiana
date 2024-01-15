@@ -1,0 +1,68 @@
+/* Contact.css */
+
+/* Overall Container */
+.contact-container div {
+    font-family: Arial, sans-serif; 
+    margin: 0 auto;
+    max-width: 600px; 
+    padding: 40px 20px;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.contact-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Message after submission */
+.contact-container p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Label Styling */
+.contact-container label {
+    display: block;
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+/* Input and Textarea Styling */
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+input:focus, textarea:focus {
+    border-color: #007bff;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

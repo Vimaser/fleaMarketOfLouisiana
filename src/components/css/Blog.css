@@ -1,0 +1,93 @@
+/* Overall Container */
+.blog-container {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    max-width: 800px; /* Set a max width for readability */
+    padding: 40px 20px;
+    line-height: 1.6;
+}
+
+/* Blog title */
+.blog-container > h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #f2f2f2;
+    padding-bottom: 10px;
+}
+
+/* Individual Post Styling */
+.blog-post h3 {
+    font-size: 2rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.blog-post h4 {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.blog-post p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+/* Edit and Delete Links */
+.blog-post a {
+    padding: 5px 15px;
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.blog-post a:hover {
+    background-color: #f2f2f2;
+}
+
+/* If you want to give edit and delete buttons distinct colors */
+.blog-post [to*='/editblog/'] {
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.blog-post [to*='/editblog/']:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.blog-post [to*='/deleteblog/'] {
+    color: #ff4b5c;
+    border: 1px solid #ff4b5c;
+}
+
+.blog-post [to*='/deleteblog/']:hover {
+    background-color: #ff4b5c;
+    color: white;
+}
+
+/* Create New Post Button */
+.blog-container [to='/createblog'] {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.blog-container [to='/createblog']:hover {
+    background-color: #0056b3;
+}
+
+.blog-container hr {
+    margin: 40px 0;
+    border: 0;
+    border-top: 1px solid #f2f2f2;
+}

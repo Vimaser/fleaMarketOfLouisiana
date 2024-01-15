@@ -1,0 +1,105 @@
+/* Reset some default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Define a global font */
+body {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333; /* default text color */
+  background-color: #f4f4f4; /* light background color */
+}
+
+/* Mobile First Styles */
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 15px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+    
+    /* Additional mobile specific styles can go here */
+}
+
+/* For even smaller devices like iPhone 5/SE */
+@media only screen and (max-width: 320px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* Adjust styles specifically for very small devices here */
+}
+
+/* Hyperlink Styles */
+a {
+  text-decoration: none;
+  color: #007bff; /* default link color */
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+button {
+  cursor: pointer;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+/* Layout Styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Common Elements */
+header, footer {
+  padding: 20px 0;
+  background-color: #282c34;
+  color: #ffffff;
+}
+
+header h1, footer h1 {
+  text-align: center;
+}
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+/* Dark Mode Global */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+/* Additional Breakpoints (if needed) */
+
+/* For Tablets */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    /* Adjust styles specifically for tablet devices here */
+}
+
+/* For Large Desktops */
+@media only screen and (min-width: 1201px) {
+    /* Adjust styles specifically for large desktops here */
+}

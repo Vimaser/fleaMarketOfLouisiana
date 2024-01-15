@@ -1,0 +1,37 @@
+.flea-market-map {
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    grid-template-rows: repeat(30, 50px);
+    gap: 5px;
+}
+
+.lot {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.lot.occupied {
+    background-color: #f88; /* Color for occupied lots */
+}
+
+.lot.potentially-available {
+    background-color: #8f8; /* Color for potentially available lots */
+}
+
+/* Styles for special types of lots, if needed */
+.lot.blacked-out {
+    background-color: black;
+}
+
+.lot.empty {
+    background-color: white;
+}
+
+/* Hover effect */
+.lot:hover {
+    opacity: 0.7;
+}

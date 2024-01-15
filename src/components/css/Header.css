@@ -1,0 +1,64 @@
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 24px;
+}
+
+.hamburger div {
+    height: 3px;
+    background-color: #333;
+    margin: 2px 0;
+    transition: 0.4s;
+}
+
+.menu-items {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align the menu items */
+}
+
+.menu-items a, .menu-items button {
+    color: #333;
+    margin: 0 10px;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.menu-items a:hover, .menu-items button:hover {
+    background-color: #e6e6e6;
+}
+
+.menu-items a.active, .menu-items button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Mobile view styles */
+@media only screen and (max-width: 768px) {
+    .menu-items {
+        flex-direction: column;
+        width: 100%;
+        display: none; /* Hide menu items by default in mobile view */
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav.open .menu-items {
+        display: flex; /* Show menu items when mobile menu is open */
+    }
+}

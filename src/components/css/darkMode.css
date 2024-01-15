@@ -1,0 +1,313 @@
+/* Global dark mode styles */
+
+body.dark-mode {
+    background-color: #121212;
+    color: #f2f2f2;
+}
+
+/* Services Component dark mode styles */
+
+.services-container.dark-mode {
+    background-color: #121212;
+    color: #f2f2f2;
+}
+
+.services-container.dark-mode h2 {
+    color: #FFAA80;
+}
+
+.services-container.dark-mode .service-card {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+.services-container.dark-mode .create-link {
+    background-color: #0056b3;
+}
+
+.services-container.dark-mode .create-link:hover {
+    background-color: #003d7a;
+}
+
+.services-container.dark-mode .edit-link,
+.services-container.dark-mode .delete-link {
+    color: #a8a8a8;
+}
+
+.services-container.dark-mode .delete-link:hover {
+    color: #ff4444;
+}
+
+/* Header */
+
+
+/* Dark mode styles */
+[data-dark='true'] nav {
+    background-color: #333;
+}
+
+[data-dark='true'] nav a,
+[data-dark='true'] nav button {
+    color: #f2f2f2;
+}
+
+[data-dark='true'] nav a.active {
+    background-color: #007bff;
+}
+
+[data-dark='true'] nav a:hover {
+    background-color: #555;
+}
+
+/* Dark mode toggle button styles */
+button {
+    padding: 5px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Home */
+
+/* Dark mode styles */
+[data-dark='true'] .home-container {
+    background-color: #121212;
+    color: white;
+}
+
+[data-dark='true'] .home-container .hero-section {
+    background-color: #1e1e1e;
+}
+
+[data-dark='true'] .home-container .service-item {
+    background-color: #242424;
+    border-color: #333;
+}
+
+[data-dark='true'] .home-container .btn-primary {
+    background-color: #0a74da;
+}
+
+[data-dark='true'] .home-container .btn-success {
+    background-color: #229c5f;
+}
+
+/* Portfolio */
+
+
+/* Dark mode styles */
+[data-dark='true'] .portfolio-container {
+    background-color: #1e1e1e;
+}
+
+[data-dark='true'] .portfolio-item {
+    background-color: #242424;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+[data-dark='true'] .portfolio-description {
+    color: #bbb;
+}
+
+[data-dark='true'] .portfolio-link {
+    color: #0a74da;
+}
+
+[data-dark='true'] .portfolio-link:hover {
+    color: #007bff;
+}
+
+/* Dark Mode */
+.dark-mode {
+    background-color: #121212;
+}
+
+.dark-mode .portfolio-header h2,
+.dark-mode .portfolio-card h3,
+.dark-mode .portfolio-card p {
+    color: white;
+}
+
+.dark-mode .portfolio-card {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+
+/* Blog */
+
+.dark-mode .blog-container {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+}
+
+.dark-mode .blog-container h2 {
+    color: #ddd;
+    border-bottom-color: #3a3a3a;
+}
+
+.dark-mode .blog-container h3 {
+    color: #ccc;
+}
+
+.dark-mode .blog-container h4 {
+    color: #bbb;
+}
+
+.dark-mode .blog-container p {
+    color: #aaa;
+}
+
+.dark-mode .blog-container a {
+    background-color: #2a2a2a;
+    color: #bbb;
+    border-color: #4a4a4a;
+}
+
+.dark-mode .blog-container a:hover {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+.dark-mode [to*='/editblog/'] {
+    color: #00afff;
+    border-color: #00afff;
+}
+
+.dark-mode [to*='/editblog/']:hover {
+    background-color: #009bdf;
+    color: white;
+}
+
+.dark-mode [to*='/deleteblog/'] {
+    color: #ff5b6c;
+    border-color: #ff5b6c;
+}
+
+.dark-mode [to*='/deleteblog/']:hover {
+    background-color: #ff3a4c;
+    color: white;
+}
+
+.dark-mode [to='/createblog'] {
+    background-color: #00afff;
+    color: white;
+}
+
+.dark-mode [to='/createblog']:hover {
+    background-color: #009bdf;
+}
+
+.dark-mode hr {
+    border-top-color: #3a3a3a;
+}
+
+/* darkMode.css */
+
+/* When dark-mode is enabled using [data-dark='true'] */
+[data-dark='true'] .blog-container {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+}
+
+[data-dark='true'] .blog-container h2 {
+    color: #ddd;
+    border-bottom-color: #3a3a3a;
+}
+
+[data-dark='true'] .blog-container h3 {
+    color: #ccc;
+}
+
+[data-dark='true'] .blog-container h4 {
+    color: #bbb;
+}
+
+[data-dark='true'] .blog-container p {
+    color: #aaa;
+}
+
+[data-dark='true'] .blog-container a {
+    background-color: #2a2a2a;
+    color: #bbb;
+    border-color: #4a4a4a;
+}
+
+[data-dark='true'] .blog-container a:hover {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+[data-dark='true'] [to*='/editblog/'] {
+    color: #00afff;
+    border-color: #00afff;
+}
+
+[data-dark='true'] [to*='/editblog/']:hover {
+    background-color: #009bdf;
+    color: white;
+}
+
+[data-dark='true'] [to*='/deleteblog/'] {
+    color: #ff5b6c;
+    border-color: #ff5b6c;
+}
+
+[data-dark='true'] [to*='/deleteblog/']:hover {
+    background-color: #ff3a4c;
+    color: white;
+}
+
+[data-dark='true'] [to='/createblog'] {
+    background-color: #00afff;
+    color: white;
+}
+
+[data-dark='true'] [to='/createblog']:hover {
+    background-color: #009bdf;
+}
+
+[data-dark='true'] hr {
+    border-top-color: #3a3a3a;
+}
+/* Services Component dark mode styles */
+
+/* When dark-mode is enabled using [data-dark='true'] */
+[data-dark='true'] .services-container {
+    background-color: #121212;
+    color: #f2f2f2;
+}
+
+[data-dark='true'] .services-container h2 {
+    color: #FFAA80;
+}
+
+[data-dark='true'] .services-container .service-card {
+    background-color: #1e1e1e;
+    border-color: #333;
+}
+
+[data-dark='true'] .services-container .create-link {
+    background-color: #0056b3;
+}
+
+[data-dark='true'] .services-container .create-link:hover {
+    background-color: #003d7a;
+}
+
+[data-dark='true'] .services-container .edit-link,
+[data-dark='true'] .services-container .delete-link {
+    color: #a8a8a8;
+}
+
+[data-dark='true'] .services-container .delete-link:hover {
+    color: #ff4444;
+}
