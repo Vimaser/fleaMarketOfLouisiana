@@ -11,6 +11,8 @@ const FAQs = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
+  console.log(isLoggedIn); 
+
   useEffect(() => {
     const fetchData = async () => {
       const db = getFirestore();
