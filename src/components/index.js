@@ -28,4 +28,5 @@ export { default as Header } from "./Header";
 export { default as Footer } from "./Footer";
 export { default as useUserRole } from "./useUserRole";
 export { default as AdminPortal } from "./AdminPortal";
-export { default as FleaMarketMap } from "./FleaMarketMap"
+export { default as FleaMarketMap } from "./FleaMarketMap";
+export { default as AuthCallback } from "./auth-callback";

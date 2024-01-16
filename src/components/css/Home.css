@@ -6,6 +6,7 @@ body {
 .home-container {
     font-family: 'Arial', sans-serif;
     padding: 20px;
+    background-color: #FFBA24;
 }
 
 .hero-section {
@@ -42,6 +43,17 @@ body {
     background-color: #28a745;
     color: white;
 }
+
+.image-section {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center; /* Vertical centering */
+    height: 100%; /* Ensure the section takes up the full height of its container */
+  }
+  
+  .image-section img {
+    max-width: 100%; /* Adjust the width as needed */
+  }
 
 /* Mobile Styles */
 @media only screen and (max-width: 768px) {

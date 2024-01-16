@@ -70,17 +70,17 @@ const Home = () => {
 
   useEffect(() => {
     // Filter vendors based on search query
-    if (searchQuery.length === 0) {
-      setFilteredVendors(allVendors);
-    } else {
-      setFilteredVendors(
-        allVendors.filter(
-          (vendor) =>
-            vendor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            vendor.lotNum.toLowerCase().includes(searchQuery.toLowerCase())
-        )
+    const filteredVendors = allVendors.filter((vendor) => {
+      const name = vendor.name || ""; // Default to empty string if undefined
+      const lotNum = vendor.lotNum || ""; // Default to empty string if undefined
+      const query = searchQuery.toLowerCase();
+      return (
+        name.toLowerCase().includes(query) ||
+        lotNum.toLowerCase().includes(query)
       );
-    }
+    });
+
+    setFilteredVendors(filteredVendors);
   }, [searchQuery, allVendors]);
 
   const deleteEvent = async (eventId) => {
@@ -125,7 +125,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <section className="image-section">
-        <img src={img} alt="Dan Broe" />
+        <img src={img} alt="FleaBro" />
       </section>
 
       {/* Highlights Section */}

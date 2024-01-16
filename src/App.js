@@ -1,18 +1,14 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./firebaseConfig";
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
-import './firebaseConfig';
-import { 
   Home,
   Blog,
   Contact,
   Messages,
   Portfolio,
   FleaMarketMap,
-  EditPortfolio, 
+  EditPortfolio,
   Login,
   Logout,
   Services,
@@ -33,9 +29,11 @@ import {
   VendorSignUp,
   VendorLogin,
   Events,
+  AuthCallback,
   CreateEvents,
-  Header } from "./components";
-  import './App.css'; 
+  Header
+} from "./components";
+import "./App.css";
 
 function App() {
   const [darkMode] = useState(false);
@@ -60,6 +58,7 @@ function App() {
         <Route path="/editservice/:serviceId" element={<EditServices />} />
         <Route path="/editblog/:blogId" element={<EditBlog />} />
         <Route path="/createblog" element={<CreateBlog />} />
+        <Route path="/auth-callback" element={<AuthCallback />} />
         <Route path="/CreateFAQs" element={<CreateFAQs />} />
         <Route path="/deleteblog/:id" element={<DeleteBlog />} />
         <Route path="/deletemessages/:id" element={<DeleteMessages />} />
@@ -73,7 +72,7 @@ function App() {
         <Route path="/fleamarketmap" element={<FleaMarketMap />} />
       </Routes>
       <Footer />
-    </ Router>
+    </Router>
   );
 }
 
