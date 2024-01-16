@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import useUserRole from "./useUserRole";
 import "../firebaseConfig";
 
@@ -115,9 +115,26 @@ const Vendor = () => {
   };
 
   const handleImageUpload = async () => {
-    // Add logic to check the file size and type if needed
     if (imageFile) {
-      await uploadImageToFirebase(imageFile); // Upload to Firebase
+      const storage = getStorage();
+      const newImageRef = ref(storage, `vendor-images/${vendorID}/${imageFile.name}`);
+  
+      try {
+        // Delete existing image if it exists
+        if (vendor && vendor.images) {
+          const oldImageRef = ref(storage, vendor.images);
+          await deleteObject(oldImageRef).catch(error => console.error("Error deleting old image:", error));
+        }
+  
+        // Upload the new image
+        const snapshot = await uploadBytes(newImageRef, imageFile);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+  
+        setImages(downloadURL); // Update state with new image URL
+        // Update Firestore with new image URL if needed
+      } catch (error) {
+        console.error("Error uploading new image:", error);
+      }
     }
   };
 
