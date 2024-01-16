@@ -25,7 +25,7 @@ const Vendor = () => {
   const [images, setImages] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lotNum, setLotNum] = useState("");
-  const OAuth = process.env.REACT_APP_IMGUR_CLIENT_ID;
+  // const OAuth = process.env.REACT_APP_IMGUR_CLIENT_ID;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,16 +55,16 @@ const Vendor = () => {
     });
   }, [vendorID, db, auth]);
 
-  const redirectToImgurOAuth = () => {
+/*   const redirectToImgurOAuth = () => {
     const clientId = process.env.REACT_APP_IMGUR_CLIENT_ID;
     const redirectUri = encodeURIComponent(
       "https://thefleamarketoflouisiana.com/auth-callback"
     );
     localStorage.setItem("vendorID", vendorID);
     window.location.href = `https://api.imgur.com/oauth2/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}`;
-  };
+  }; */
 
-  const uploadImageToImgur = async (imageFile) => {
+/*   const uploadImageToImgur = async (imageFile) => {
     const formData = new FormData();
     formData.append("image", imageFile);
 
@@ -91,7 +91,7 @@ const Vendor = () => {
       console.error("Error uploading image:", error);
       return null;
     }
-  };
+  }; */
 
   const uploadImageToFirebase = async (imageFile) => {
     if (imageFile) {
