@@ -65,8 +65,11 @@ const Vendor = () => {
   const uploadImageToImgur = async (imageFile) => {
     const formData = new FormData();
     formData.append("image", imageFile);
+  
+    // Retrieve the access token from local storage
     const accessToken = localStorage.getItem("access_token");
-
+    console.log("Access Token:", accessToken); // Log the access token to console
+  
     try {
       const response = await fetch("https://api.imgur.com/3/image", {
         method: "POST",
@@ -75,7 +78,7 @@ const Vendor = () => {
         },
         body: formData,
       });
-
+  
       const data = await response.json();
       if (data.success) {
         return data.data.link;
@@ -87,6 +90,7 @@ const Vendor = () => {
       return null;
     }
   };
+  
 
   const handleImageUpload = async () => {
     if (imageFile) {
