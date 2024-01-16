@@ -22,7 +22,7 @@ const Vendor = () => {
   const [contactInformation, setContactInformation] = useState("");
   const [locationInMarket, setLocationInMarket] = useState("");
   const [productCategories, setProductCategories] = useState("");
-  const [accessToken, setAccessToken] = useState(null);
+  //const [accessToken, setAccessToken] = useState(null);
   const [images, setImages] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lotNum, setLotNum] = useState("");
