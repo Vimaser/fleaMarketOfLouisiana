@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 import useUserRole from "./useUserRole";
 import "../firebaseConfig";
 
@@ -55,7 +61,7 @@ const Vendor = () => {
     });
   }, [vendorID, db, auth]);
 
-/*   const redirectToImgurOAuth = () => {
+  /*   const redirectToImgurOAuth = () => {
     const clientId = process.env.REACT_APP_IMGUR_CLIENT_ID;
     const redirectUri = encodeURIComponent(
       "https://thefleamarketoflouisiana.com/auth-callback"
@@ -64,7 +70,7 @@ const Vendor = () => {
     window.location.href = `https://api.imgur.com/oauth2/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}`;
   }; */
 
-/*   const uploadImageToImgur = async (imageFile) => {
+  /*   const uploadImageToImgur = async (imageFile) => {
     const formData = new FormData();
     formData.append("image", imageFile);
 
@@ -93,7 +99,7 @@ const Vendor = () => {
     }
   }; */
 
-  const uploadImageToFirebase = async (imageFile) => {
+  /*   const uploadImageToFirebase = async (imageFile) => {
     if (imageFile) {
       const storage = getStorage();
       const storageRef = ref(
@@ -112,28 +118,29 @@ const Vendor = () => {
         console.error("Error uploading image to Firebase:", error);
       }
     }
-  };
+  }; */
 
   const handleImageUpload = async () => {
     if (imageFile) {
       const storage = getStorage();
-      const newImageRef = ref(storage, `vendor-images/${vendorID}/${imageFile.name}`);
-  
+      const imageRef = ref(
+        storage,
+        `vendor-images/${vendorID}/${imageFile.name}`
+      );
+
       try {
-        // Delete existing image if it exists
-        if (vendor && vendor.images) {
-          const oldImageRef = ref(storage, vendor.images);
-          await deleteObject(oldImageRef).catch(error => console.error("Error deleting old image:", error));
-        }
-  
         // Upload the new image
-        const snapshot = await uploadBytes(newImageRef, imageFile);
+        const snapshot = await uploadBytes(imageRef, imageFile);
         const downloadURL = await getDownloadURL(snapshot.ref);
-  
-        setImages(downloadURL); // Update state with new image URL
-        // Update Firestore with new image URL if needed
+
+        // Update the images state with the new image URL
+        setImages(downloadURL);
+
+        // Update Firestore document with the new image URL
+        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
+        await updateDoc(vendorRef, { images: downloadURL });
       } catch (error) {
-        console.error("Error uploading new image:", error);
+        console.error("Error uploading image:", error);
       }
     }
   };
