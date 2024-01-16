@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import useUserRole from "./useUserRole";
 import "../firebaseConfig";
 
@@ -24,6 +25,7 @@ const Vendor = () => {
   const [images, setImages] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lotNum, setLotNum] = useState("");
+  const OAuth = process.env.REACT_APP_IMGUR_CLIENT_ID;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,20 +67,20 @@ const Vendor = () => {
   const uploadImageToImgur = async (imageFile) => {
     const formData = new FormData();
     formData.append("image", imageFile);
-  
+
     // Retrieve the access token from local storage
     const accessToken = localStorage.getItem("access_token");
     console.log("Access Token:", accessToken); // Log the access token to console
-  
+
     try {
       const response = await fetch("https://api.imgur.com/3/image", {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Client-ID ${OAuth}`,
         },
         body: formData,
       });
-  
+
       const data = await response.json();
       if (data.success) {
         return data.data.link;
@@ -90,16 +92,43 @@ const Vendor = () => {
       return null;
     }
   };
-  
+
+  const uploadImageToFirebase = async (imageFile) => {
+    if (imageFile) {
+      const storage = getStorage();
+      const storageRef = ref(
+        storage,
+        `vendor-images/${vendorID}/${imageFile.name}`
+      );
+
+      try {
+        // Upload the file and metadata to Firebase Storage
+        const snapshot = await uploadBytes(storageRef, imageFile);
+
+        // Get the download URL of the uploaded file
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        setImages(downloadURL); // Sets the state to the URL of the uploaded image
+      } catch (error) {
+        console.error("Error uploading image to Firebase:", error);
+      }
+    }
+  };
 
   const handleImageUpload = async () => {
+    // Add logic to check the file size and type if needed
+    if (imageFile) {
+      await uploadImageToFirebase(imageFile); // Upload to Firebase
+    }
+  };
+
+  /*   const handleImageUpload = async () => {
     if (imageFile) {
       const uploadedImageUrl = await uploadImageToImgur(imageFile);
       if (uploadedImageUrl) {
         setImages(uploadedImageUrl);
       }
     }
-  };
+  }; */
 
   const updateVendor = async (e) => {
     e.preventDefault();
@@ -190,7 +219,7 @@ const Vendor = () => {
           </label>
           <br />
           <label>
-            Images:
+            Images (URL):
             <input
               type="text"
               value={images}
@@ -205,13 +234,18 @@ const Vendor = () => {
               onChange={(e) => setImageFile(e.target.files[0])}
             />
           </label>
-          <button onClick={redirectToImgurOAuth}>
-            Authenticate with Imgur
-          </button>
           <button type="button" onClick={handleImageUpload}>
-            Upload Image
+            Upload Image to Firebase
           </button>
-          \
+          <br />
+          {images && (
+            <img
+              src={images}
+              alt="Uploaded"
+              style={{ width: "100px", height: "100px" }}
+            />
+          )}
+          <br />
           <label>
             Avatar (URL):
             <input
