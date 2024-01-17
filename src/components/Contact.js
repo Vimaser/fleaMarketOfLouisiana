@@ -80,9 +80,9 @@ const Contact = () => {
           <label>
             Phone Number:
             <input
-              type="phoneNum"
+              type="tel" // Changed from "phoneNum" to the correct input type "tel"
               value={phoneNum}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setPhoneNum(e.target.value)} // Corrected to setPhoneNum
             />
           </label>
           <label>
