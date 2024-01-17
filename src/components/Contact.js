@@ -12,6 +12,7 @@ import "./css/Contact.css";
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNum, setPhoneNum] = useState("");
   const [message, setMessage] = useState("");
   const [captchaValue, setCaptchaValue] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,7 @@ const Contact = () => {
     const newMessage = {
       name,
       email,
+      phoneNum,
       message,
       dateReceived: serverTimestamp(),
     };
@@ -39,6 +41,7 @@ const Contact = () => {
       setSubmitted(true);
       setName("");
       setEmail("");
+      setPhoneNum("");
       setMessage("");
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -71,6 +74,14 @@ const Contact = () => {
             <input
               type="email"
               value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Phone Number:
+            <input
+              type="phoneNum"
+              value={phoneNum}
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
