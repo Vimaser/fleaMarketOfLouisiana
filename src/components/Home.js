@@ -252,7 +252,7 @@ const Home = () => {
                     src={ourVendors[currentVendorIndex].images}
                     alt={`${
                       ourVendors[currentVendorIndex].name || "Vendor"
-                    }'s photo`}
+                    } representation`}
                     style={{ maxWidth: "100%", height: "auto" }}
                   />
                 )}
@@ -282,12 +282,13 @@ const Home = () => {
             {ourVendors[currentVendorIndex].images && (
               <img
                 src={ourVendors[currentVendorIndex].images}
-                alt={`Image for ${
-                  ourVendors[currentVendorIndex].name || "vendor"
-                }`}
+                alt={`${
+                  ourVendors[currentVendorIndex].name || "Vendor"
+                } representation`}
                 style={{ maxWidth: "100%", height: "auto" }}
               />
             )}
+
             <p>{ourVendors[currentVendorIndex].productCategories}</p>
             <p>{ourVendors[currentVendorIndex].description}</p>
             <p>Location: {ourVendors[currentVendorIndex].locationInMarket}</p>
