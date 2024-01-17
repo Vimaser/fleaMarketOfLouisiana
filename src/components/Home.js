@@ -12,6 +12,7 @@ import "../firebaseConfig";
 import useUserRole from "./useUserRole";
 import img from "../img/fleabro1.gif";
 import GoogleMap from "./GoogleMap";
+import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";
 
 const Home = () => {
@@ -267,6 +268,10 @@ const Home = () => {
       {/* Location */}
 
       <GoogleMap />
+
+      {/* Location */}
+
+      <FacebookPageEmbed />
 
       {/* Featured Vendors Section */}
       <section className="featured-vendors">
