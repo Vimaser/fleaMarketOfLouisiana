@@ -33,6 +33,8 @@ import {
   CreateEvents,
   GoogleMap,
   Map,
+  Search,
+  VendorPage,
   Header
 } from "./components";
 import "./App.css";
@@ -71,6 +73,8 @@ function App() {
         <Route path="/createportfolio" element={<CreatePortfolio />} />
         <Route path="/createevents" element={<CreateEvents />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/vendorpage/:vendorID" element={<VendorPage />} />
         <Route path="/adminportal" element={<AdminPortal />} />
         <Route path="/createservices" element={<CreateServices />} />
         <Route path="/fleamarketmap" element={<FleaMarketMap />} />

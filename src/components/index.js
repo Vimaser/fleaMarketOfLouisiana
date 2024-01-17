@@ -32,3 +32,5 @@ export { default as FleaMarketMap } from "./FleaMarketMap";
 export { default as AuthCallback } from "./auth-callback";
 export { default as Map } from "./Map";
 export { default as GoogleMap } from "./GoogleMap";
+export { default as Search } from "./Search";
+export { default as VendorPage } from "./VendorPage";

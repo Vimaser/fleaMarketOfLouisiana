@@ -90,6 +90,9 @@ const Header = () => {
         <NavLink to="/map" activeClassName="active">
           Map
         </NavLink>
+        <NavLink to="/search" activeClassName="active">
+          Search Vendors
+        </NavLink>
         {user ? (
           <NavLink to={`/vendor/${user.uid}`} activeClassName="active">
             Vendor
