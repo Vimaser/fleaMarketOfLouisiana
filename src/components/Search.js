@@ -60,7 +60,7 @@ const Search = () => {
         <div>
           {vendors.map((vendor) => (
             <div key={vendor.id} className="vendor-info">
-              <Link to={`/vendor/${vendor.id}`}>
+              <Link to={`/vendorpage/${vendor.id}`}>
                 <h3>{vendor.name}</h3>
               </Link>
               <p>Description: {vendor.description}</p>
