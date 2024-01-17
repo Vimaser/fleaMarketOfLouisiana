@@ -31,7 +31,15 @@ const Vendor = () => {
   const [images, setImages] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lotNum, setLotNum] = useState("");
+  //const [imageDeleted, setImageDeleted] = useState(false);
+  const [imageUploaded, setImageUploaded] = useState(false);
+
   // const OAuth = process.env.REACT_APP_IMGUR_CLIENT_ID;
+
+/*   const resetUploadState = () => {
+    setImageUploaded(false);
+    setImageDeleted(false);
+  }; */
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,6 +68,14 @@ const Vendor = () => {
       setCurrentUser(user);
     });
   }, [vendorID, db, auth]);
+
+  useEffect(() => {
+    if (images) {
+      setImageUploaded(true);
+    } else {
+      setImageUploaded(false);
+    }
+  }, [images]);
 
   /*   const redirectToImgurOAuth = () => {
     const clientId = process.env.REACT_APP_IMGUR_CLIENT_ID;
@@ -120,7 +136,81 @@ const Vendor = () => {
     }
   }; */
 
+  const handleDeleteImage = async () => {
+    if (vendor && vendor.images) {
+      const storage = getStorage();
+      // Extract the path from the existing image URL
+      const imageUrl = vendor.images;
+      const imagePath = imageUrl
+        .replace(
+          `https://firebasestorage.googleapis.com/v0/b/${storage.app.options.storageBucket}/o/`,
+          ""
+        )
+        .split("?")[0];
+  
+      // Decode the URI and create a reference to the image
+      const imageRef = ref(storage, decodeURIComponent(imagePath));
+  
+      try {
+        await deleteObject(imageRef);
+        // Reset the image state
+        setImages("");
+  
+        // Update Firestore to remove the image URL
+        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
+        await updateDoc(vendorRef, { images: "" });
+  
+        // Display an alert, update the state, and trigger a re-render
+        alert("Image deleted successfully!");
+  
+        // Update the local vendor state to reflect the deletion
+        setVendor({ ...vendor, images: "" });
+      } catch (error) {
+        console.error("Error deleting image:", error);
+        alert("Failed to delete image.");
+      }
+    }
+  };
+  
+
   const handleImageUpload = async () => {
+    if (imageFile) {
+      if (vendor && vendor.images) {
+        alert("Please delete the existing image before uploading a new one.");
+        return;
+      }
+  
+      const storage = getStorage();
+      const newImageRef = ref(storage, `vendor-images/${vendorID}/${imageFile.name}`);
+  
+      try {
+        const snapshot = await uploadBytes(newImageRef, imageFile);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+  
+        // Update state with new image URL
+        setImages(downloadURL);
+  
+        // Update the vendor object in state
+        const updatedVendor = { ...vendor, images: downloadURL };
+        setVendor(updatedVendor);
+  
+        // Update Firestore with new image URL
+        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
+        await updateDoc(vendorRef, { images: downloadURL });
+  
+        // Display an alert and update the state
+        alert("Image uploaded successfully!");
+        setImageUploaded(true);
+  
+      } catch (error) {
+        console.error("Error uploading new image:", error);
+        alert("Failed to upload image.");
+      }
+    }
+  };
+  
+
+  /*   const handleImageUpload = async () => {
     if (imageFile) {
       const storage = getStorage();
       const newImageRef = ref(
@@ -129,12 +219,23 @@ const Vendor = () => {
       );
 
       try {
-        // Delete existing image if it exists
         if (vendor && vendor.images) {
-          const oldImageRef = ref(storage, vendor.images);
-          await deleteObject(oldImageRef).catch((error) =>
-            console.error("Error deleting old image:", error)
-          );
+          const imageUrl = vendor.images;
+          const imagePath = imageUrl
+            .replace(
+              "https://firebasestorage.googleapis.com/v0/b/" +
+                storage.bucket +
+                "/o/",
+              ""
+            )
+            .split("?")[0]; // Extract the path from the URL
+
+          const oldImageRef = ref(storage, decodeURIComponent(imagePath));
+          try {
+            await deleteObject(oldImageRef);
+          } catch (error) {
+            console.error("Error deleting old image:", error);
+          }
         }
 
         // Upload the new image
@@ -150,7 +251,7 @@ const Vendor = () => {
         console.error("Error uploading new image:", error);
       }
     }
-  };
+  }; */
 
   /*   const handleImageUpload = async () => {
     if (imageFile) {
@@ -190,18 +291,18 @@ const Vendor = () => {
       {vendor && !editMode ? (
         <>
           <h2>{vendor.name}</h2>
-          <p>Avatar: {vendor.avatar}</p>
+          <p>External Hosting: {vendor.avatar}</p>
           <p>{vendor.description}</p>
           <p>Contact Info: {vendor.contactInformation}</p>
           <p>Location: {vendor.locationInMarket}</p>
           <p>Categories: {vendor.productCategories}</p>
           <p>ID: {vendor.vendorID}</p>
           <p>
-            Images:{" "}
+            Images:
             {vendor.images && (
               <img
                 src={vendor.images}
-                alt={`${vendor.name}'s uploaded`}
+                alt={`${vendor.name}'s upload`}
                 style={{ maxWidth: "100%", height: "auto" }}
               />
             )}
@@ -259,41 +360,51 @@ const Vendor = () => {
           </label>
           <br />
           <label>
-            Images (URL):
-            <input
-              type="text"
-              value={images}
-              onChange={(e) => setImages(e.target.value)}
-            />
-          </label>
-          <br />
-          <label>
-            Image Upload:
-            <input
-              type="file"
-              onChange={(e) => setImageFile(e.target.files[0])}
-            />
-          </label>
-          <button type="button" onClick={handleImageUpload}>
-            Upload Image to Firebase
-          </button>
-          <br />
-          {images && (
-            <img
-              src={images}
-              alt="Uploaded"
-              style={{ width: "100px", height: "100px" }}
-            />
-          )}
-          <br />
-          <label>
-            Avatar (URL):
+            External Hosting (URL):
             <input
               type="text"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
             />
           </label>
+          <br />
+
+          {vendor.images ? (
+            <>
+              <p>Current Image:</p>
+              <img
+                src={vendor.images}
+                alt="Current upload"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+              <button type="button" onClick={handleDeleteImage}>
+                Delete Image
+              </button>
+              <p>
+                Please delete the existing image before uploading a new one.
+              </p>
+            </>
+          ) : (
+            <>
+              <p>
+                You can upload one image. For more images, use External Hosting.
+              </p>
+              <label>
+                Image Upload:
+                <input
+                  type="file"
+                  onChange={(e) => setImageFile(e.target.files[0])}
+                />
+              </label>
+              {imageUploaded ? (
+                <p>Image uploaded successfully!</p>
+              ) : (
+                <button type="button" onClick={handleImageUpload}>
+                  Upload Image to Firebase
+                </button>
+              )}
+            </>
+          )}
           <br />
           <label>
             Lot Number:

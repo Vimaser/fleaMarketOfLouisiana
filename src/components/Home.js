@@ -11,6 +11,7 @@ import {
 import "../firebaseConfig";
 import useUserRole from "./useUserRole";
 import img from "../img/fleabro1.gif";
+import GoogleMap from "./GoogleMap";
 import "./css/Home.css";
 
 const Home = () => {
@@ -262,6 +263,10 @@ const Home = () => {
           ))}
         </section>
       )}
+
+      {/* Location */}
+
+      <GoogleMap />
 
       {/* Featured Vendors Section */}
       <section className="featured-vendors">

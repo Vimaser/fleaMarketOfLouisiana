@@ -31,6 +31,8 @@ import {
   Events,
   AuthCallback,
   CreateEvents,
+  GoogleMap,
+  Map,
   Header
 } from "./components";
 import "./App.css";
@@ -60,6 +62,8 @@ function App() {
         <Route path="/createblog" element={<CreateBlog />} />
         <Route path="/auth-callback" element={<AuthCallback />} />
         <Route path="/CreateFAQs" element={<CreateFAQs />} />
+        <Route path="/Map" element={<Map />} />
+        <Route path="/GoogleMap" element={<GoogleMap />} />
         <Route path="/deleteblog/:id" element={<DeleteBlog />} />
         <Route path="/deletemessages/:id" element={<DeleteMessages />} />
         <Route path="/deleteportfolio/:id" element={<DeletePortfolio />} />

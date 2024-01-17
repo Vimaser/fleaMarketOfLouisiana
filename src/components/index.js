@@ -30,3 +30,5 @@ export { default as useUserRole } from "./useUserRole";
 export { default as AdminPortal } from "./AdminPortal";
 export { default as FleaMarketMap } from "./FleaMarketMap";
 export { default as AuthCallback } from "./auth-callback";
+export { default as Map } from "./Map";
+export { default as GoogleMap } from "./GoogleMap";

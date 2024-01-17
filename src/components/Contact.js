@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import React, { useState } from "react";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import ReCAPTCHA from "react-google-recaptcha";
-import '../firebaseConfig';
+import "../firebaseConfig";
 import "./css/Contact.css";
 
 const Contact = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [captchaValue, setCaptchaValue] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  //const siteKey = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
+  //console.log("ReCAPTCHA Site Key:", siteKey);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,17 +32,17 @@ const Contact = () => {
       name,
       email,
       message,
-      dateReceived: serverTimestamp()
+      dateReceived: serverTimestamp(),
     };
     try {
-      await addDoc(collection(db, 'contacts'), newMessage);
+      await addDoc(collection(db, "contacts"), newMessage);
       setSubmitted(true);
-      setName('');
-      setEmail('');
-      setMessage('');
+      setName("");
+      setEmail("");
+      setMessage("");
     } catch (error) {
-      console.error('Error adding document: ', error);
-      alert('Failed to send message.');
+      console.error("Error adding document: ", error);
+      alert("Failed to send message.");
     }
     setLoading(false);
   };
@@ -50,18 +58,41 @@ const Contact = () => {
         <p>Thank you for your message. We will get back to you soon.</p>
       ) : (
         <form onSubmit={handleSubmit}>
-          {/* ...other form fields... */}
+          <label>
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Email:
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label>
+            Message:
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </label>
           <ReCAPTCHA
-            sitekey="YOUR_RECAPTCHA_SITE_KEY" // Replace with your reCAPTCHA site key
+            sitekey="6LcSR1QpAAAAAGO2lOxWTX3UfHeBclWGRg7Ps4vd"
             onChange={onCaptchaChange}
           />
+
           <button type="submit" disabled={loading}>
-            {loading ? 'Sending...' : 'Send Message'}
+            {loading ? "Sending..." : "Send Message"}
           </button>
         </form>
       )}
     </div>
   );
-}
+};
 
 export default Contact;
