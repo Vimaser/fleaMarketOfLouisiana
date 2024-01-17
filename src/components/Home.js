@@ -250,12 +250,13 @@ const Home = () => {
                 {ourVendors[currentVendorIndex].images && (
                   <img
                     src={ourVendors[currentVendorIndex].images}
-                    alt={`Image for ${
-                      ourVendors[currentVendorIndex].name || "vendor"
-                    }`}
+                    alt={`${
+                      ourVendors[currentVendorIndex].name || "Vendor"
+                    }'s photo`}
                     style={{ maxWidth: "100%", height: "auto" }}
                   />
                 )}
+
                 <p>{ourVendors[currentVendorIndex].productCategories}</p>
                 <p>{ourVendors[currentVendorIndex].description}</p>
                 {/* Add more vendor details here */}
