@@ -33,8 +33,7 @@ const VendorPage = () => {
         <>
           <h2>{vendor.name}</h2>
           <p>{vendor.description}</p>
-          <p>Location in Market: {vendor.locationInMarket}</p>
-          <p>Product Categories: {vendor.productCategories}</p>
+
           {vendor.images && (
             <img
               src={vendor.images}
@@ -42,6 +41,8 @@ const VendorPage = () => {
               style={{ maxWidth: "100%", height: "auto" }}
             />
           )}
+          <p>Location in Market: {vendor.locationInMarket}</p>
+          <p>Product Categories: {vendor.productCategories}</p>
           {/* Additional vendor details can be added here if needed */}
         </>
       )}

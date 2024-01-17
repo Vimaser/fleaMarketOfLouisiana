@@ -243,3 +243,10 @@ Allocate a specific time slot to address any bugs or issues you might encounter.
 Update your project documentation to reflect any new features or significant changes made.
 
 ***Working on interactive map, will probably drop because time constraints and general fustration converting an excel map with roughly 500 plus cells into an interactive map with CSS styling and functionality to tell if it's open or not... That and the deadline is by Sunday and this is mainly a bonus feature.
+
+# To-Do List for Thurday-Friday:
+
+5:47 PM
+Wednesday, January 17, 2024 (CST)
+
+Working on Thursday, but I can begin CSS. Site is functional and testing is alomst complete. I still need to set up Vendor links to their facebook, website, and embedding images on the VendorPage. This was a large project, but I'm proud of it!
