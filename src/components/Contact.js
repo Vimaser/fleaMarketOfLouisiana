@@ -35,7 +35,7 @@ const Contact = () => {
       dateReceived: serverTimestamp(),
     };
     try {
-      await addDoc(collection(db, "contacts"), newMessage);
+      await addDoc(collection(db, "messages"), newMessage);
       setSubmitted(true);
       setName("");
       setEmail("");
