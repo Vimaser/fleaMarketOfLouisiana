@@ -246,7 +246,16 @@ const Home = () => {
               <li key={vendor.id}>
                 <strong>{vendor.name}</strong>
                 <p>{ourVendors[currentVendorIndex].avatar}</p>
-                <p>{ourVendors[currentVendorIndex].images}</p>
+                <p>Image:</p>
+                {ourVendors[currentVendorIndex].images && (
+                  <img
+                    src={ourVendors[currentVendorIndex].images}
+                    alt={`Image for ${
+                      ourVendors[currentVendorIndex].name || "vendor"
+                    }`}
+                    style={{ maxWidth: "100%", height: "auto" }}
+                  />
+                )}
                 <p>{ourVendors[currentVendorIndex].productCategories}</p>
                 <p>{ourVendors[currentVendorIndex].description}</p>
                 {/* Add more vendor details here */}
@@ -268,7 +277,16 @@ const Home = () => {
           <div>
             <strong>{ourVendors[currentVendorIndex].name}</strong>
             <p>{ourVendors[currentVendorIndex].avatar}</p>
-            <p>{ourVendors[currentVendorIndex].images}</p>
+            <p>Image:</p>
+            {ourVendors[currentVendorIndex].images && (
+              <img
+                src={ourVendors[currentVendorIndex].images}
+                alt={`Image for ${
+                  ourVendors[currentVendorIndex].name || "vendor"
+                }`}
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            )}
             <p>{ourVendors[currentVendorIndex].productCategories}</p>
             <p>{ourVendors[currentVendorIndex].description}</p>
             <p>Location: {ourVendors[currentVendorIndex].locationInMarket}</p>
