@@ -273,24 +273,20 @@ const Home = () => {
             {featuredVendors.map((vendor) => (
               <li key={vendor.id}>
                 <strong>{vendor.name}</strong>
-                <p>{ourVendors[currentVendorIndex].avatar}</p>
-                <p>Image:</p>
-                {ourVendors[currentVendorIndex].images && (
-                  <img
-                    src={ourVendors[currentVendorIndex].images}
-                    alt={`${
-                      ourVendors[currentVendorIndex].name || "Vendor"
-                    } representation`}
-                    style={{ maxWidth: "100%", height: "auto" }}
-                  />
+                {vendor.avatar && <p>{vendor.avatar}</p>}
+                {vendor.images && (
+                  <div>
+                    <p>Image:</p>
+                    <img
+                      src={vendor.images}
+                      alt={`${vendor.name || "Vendor"} representation`}
+                      style={{ maxWidth: "100%", height: "auto" }}
+                    />
+                  </div>
                 )}
-
-                <p>{ourVendors[currentVendorIndex].productCategories}</p>
-                <p>{ourVendors[currentVendorIndex].description}</p>
+                <p>{vendor.productCategories}</p>
+                <p>{vendor.description}</p>
                 {/* Add more vendor details here */}
-                {/* Example: You can display an image or other details if available */}
-                {vendor.image && <img src={vendor.image} alt={vendor.name} />}
-                {/* Add any other vendor details you wish to display */}
               </li>
             ))}
           </ul>
