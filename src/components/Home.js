@@ -122,6 +122,23 @@ const Home = () => {
     }
   };
 
+  const clearFeaturedVendor = async (vendorId) => {
+    if (userRole === "Admin" && vendorId) {
+      try {
+        const vendorRef = doc(db, "Vendors", vendorId);
+        await updateDoc(vendorRef, { featured: false });
+
+        // Update local state to reflect changes
+        const updatedVendors = featuredVendors.map((vendor) =>
+          vendor.id === vendorId ? { ...vendor, featured: false } : vendor
+        );
+        setFeaturedVendors(updatedVendors.filter((vendor) => vendor.featured));
+      } catch (error) {
+        console.error("Error clearing featured status: ", error);
+      }
+    }
+  };
+
   return (
     <div className="home-container">
       <section className="image-section">
@@ -232,6 +249,17 @@ const Home = () => {
           >
             Choose Vendor
           </button>
+          {featuredVendors.map((vendor) => (
+            <li key={vendor.id}>
+              <strong>{vendor.name}</strong>
+              {/* ... other vendor details ... */}
+              {userRole === "Admin" && (
+                <button onClick={() => clearFeaturedVendor(vendor.id)}>
+                  Clear Featured
+                </button>
+              )}
+            </li>
+          ))}
         </section>
       )}
 
