@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { Link } from "react-router-dom"; // Import Link
+import { Link } from "react-router-dom";
 import "../firebaseConfig";
 import "./css/Search.css";
 
@@ -64,18 +64,16 @@ const Search = () => {
               <Link to={`/vendorpage/${vendor.id}`}>
                 <h3>{vendor.name}</h3>
               </Link>
-              {/* Conditional rendering of the image */}
               {vendor.images && (
                 <img
                   src={vendor.images}
-                  alt={`${vendor.name}'s image`}
+                  alt={vendor.name} // Updated alt text
                   className="vendor-image"
                 />
               )}
               <p>Description: {vendor.description}</p>
               <p>Lot Number: {vendor.lotNum}</p>
               <p>Product Categories: {vendor.productCategories}</p>
-              {/* Additional vendor details can be added here */}
             </div>
           ))}
         </div>
