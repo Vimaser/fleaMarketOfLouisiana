@@ -1,0 +1,86 @@
+.search-container {
+    background-color: #FFBA24;
+    color: blue;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+  }
+  
+  .search-container h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .search-container button {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .search-container button:hover {
+    background-color: darkblue;
+  }
+  
+  .vendor-info {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+  
+  .vendor-info h3 {
+    color: blue;
+    margin-bottom: 0px;
+  }
+  
+  .vendor-info p {
+    margin-bottom: 5px;
+    line-height: 1.6;
+  }
+
+  .vendor-image {
+    display: block;
+    max-width: 100px; /* Adjust as per your design preference */
+    max-height: 100px;
+    margin-top: 10px; /* Space above the image */
+  margin-bottom: 10px; /* Space below the image */
+    border-radius: 6px; /* Optional: for rounded corners */
+  }
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .search-container h2, .vendor-info h3 {
+      font-size: 1.5rem;
+    }
+  
+    .search-container input, .vendor-info p {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .search-container h2, .vendor-info h3 {
+      font-size: 1.3rem;
+    }
+  
+    .search-container input, .vendor-info p {
+      font-size: 0.9rem;
+    }
+  }
+  

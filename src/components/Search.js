@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom"; // Import Link
 import "../firebaseConfig";
-// import "./css/Search.css";
+import "./css/Search.css";
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -34,11 +34,12 @@ const Search = () => {
 
   const handleSearch = () => {
     const lowerCaseQuery = searchQuery.toLowerCase();
-    const filteredVendors = allVendors.filter(vendor => 
-      (vendor.name?.toLowerCase().includes(lowerCaseQuery) || 
-       vendor.description?.toLowerCase().includes(lowerCaseQuery) ||
-       vendor.productCategories?.toLowerCase().includes(lowerCaseQuery)) ||
-      (vendor.lotNum?.toString().toLowerCase().includes(lowerCaseQuery))
+    const filteredVendors = allVendors.filter(
+      (vendor) =>
+        vendor.name?.toLowerCase().includes(lowerCaseQuery) ||
+        vendor.description?.toLowerCase().includes(lowerCaseQuery) ||
+        vendor.productCategories?.toLowerCase().includes(lowerCaseQuery) ||
+        vendor.lotNum?.toString().toLowerCase().includes(lowerCaseQuery)
     );
     setVendors(filteredVendors);
   };
@@ -63,6 +64,14 @@ const Search = () => {
               <Link to={`/vendorpage/${vendor.id}`}>
                 <h3>{vendor.name}</h3>
               </Link>
+              {/* Conditional rendering of the image */}
+              {vendor.images && (
+                <img
+                  src={vendor.images}
+                  alt={`${vendor.name}'s image`}
+                  className="vendor-image"
+                />
+              )}
               <p>Description: {vendor.description}</p>
               <p>Lot Number: {vendor.lotNum}</p>
               <p>Product Categories: {vendor.productCategories}</p>

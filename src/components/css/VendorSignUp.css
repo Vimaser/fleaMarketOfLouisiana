@@ -1,0 +1,91 @@
+.vendor-signup {
+    background-color: #FFBA24;
+    color: blue;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .error-message {
+    color: red; /* Overrides the inline style for error messages */
+  }
+
+  .vs-h2 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .passphrase-form,
+  .signup-form {
+    margin: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+  }
+  
+  .passphrase-form label,
+  .signup-form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .passphrase-form input,
+  .signup-form input,
+  .signup-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Makes sure padding doesn't affect overall width */
+  }
+  
+  .passphrase-form .submit-passphrase-btn,
+  .signup-form .signup-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .passphrase-form .submit-passphrase-btn:hover,
+  .signup-form .signup-btn:hover {
+    background-color: darkblue;
+  }
+  
+  /* Responsive adjustments */
+@media (max-width: 768px) {
+    .passphrase-form input,
+    .signup-form input,
+    .signup-form textarea,
+    .passphrase-form .submit-passphrase-btn,
+    .signup-form .signup-btn {
+      width: 100%; /* Full width on smaller screens */
+      box-sizing: border-box; /* Ensure padding and borders are included in the width */
+    }
+  
+    .passphrase-form label,
+    .signup-form label {
+      font-size: 1rem; /* Adjust font size for readability on small screens */
+    }
+  
+    .vs-h2 {
+      font-size: 1.5rem; /* Adjust heading size for small screens */
+    }
+  }
+  
+  /* Further adjustments for very small screens */
+  @media (max-width: 480px) {
+    .passphrase-form label,
+    .signup-form label {
+      font-size: 0.9rem; /* Smaller font size for very small screens */
+    }
+  
+    .vs-h2 {
+      font-size: 1.3rem; /* Smaller heading size for very small screens */
+    }
+  }

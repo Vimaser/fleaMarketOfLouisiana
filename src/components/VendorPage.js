@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import "../firebaseConfig";
+import "./css/VendorPage.css";
 
 const VendorPage = () => {
   const [vendor, setVendor] = useState(null);

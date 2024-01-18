@@ -3,89 +3,119 @@ body {
     background-color: #FFBA24;
   }
   
-.home-container {
-    font-family: 'Arial', sans-serif;
+  .home-container {
+    font-family: 'Roboto', sans-serif;
     padding: 20px;
     background-color: #FFBA24;
-}
-
-.hero-section {
-    background: url('./sparks.gif') no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    padding: 60px 0;
-    text-align: center;
-}
-
-.about-section, .services-section, .testimonials-section, .cta-section {
-    padding: 40px 0;
-}
-
-.service-item {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.btn {
-    padding: 10px 20px;
-    margin-top: 20px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-    color: white;
-}
-
-.btn-success {
-    background-color: #28a745;
-    color: white;
-}
-
-.image-section {
+    color: blue; /* Text color set to blue */
+  }
+  
+  .image-section {
     display: flex;
     justify-content: center; /* Horizontal centering */
     align-items: center; /* Vertical centering */
-    height: 100%; /* Ensure the section takes up the full height of its container */
+    margin-bottom: 40px; /* Add spacing below the section */
   }
   
   .image-section img {
     max-width: 100%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
   }
-
-/* Mobile Styles */
-@media only screen and (max-width: 768px) {
+  
+  .highlights {
+    padding: 20px 0;
+    text-align: center; /* Centers text and content within the section */
+    color: blue; /* Text color set to blue */
+  }
+  
+  .highlights h2 {
+    margin-bottom: 10px;
+    color: white; /* Inner color */
+    -webkit-text-stroke: 1px blue; /* Stroke effect for Webkit browsers */
+    text-shadow:
+      1px 1px 0 blue, /* Horizontal and vertical shadow */
+      -1px -1px 0 blue, /* Horizontal and vertical shadow */
+      -1px 1px 0 blue, /* Horizontal and vertical shadow */
+      1px -1px 0 blue; /* Horizontal and vertical shadow */
+  }
+  
+  .highlights p, .highlights li {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for smaller text */
+  }
+  
+  .highlights ul {
+    list-style-type: none; /* Removes bullet points */
+    padding: 0;
+    margin: 0 auto; /* Centers the list */
+    display: inline-block; /* Aligns the list items horizontally */
+  }
+  
+  .highlights li {
+    margin-bottom: 10px; /* Spacing between list items */
+  }
+  
+  .upcoming-events, .admin-vendor-selection, .featured-vendors {
+    padding: 20px 0;
+  }
+  
+  .event-item {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .event-image {
+    max-width: 100px; /* Adjust as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px;
+  }
+  
+  /* Button styles retained from your existing CSS */
+  .btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  /* Mobile Styles */
+  @media only screen and (max-width: 768px) {
     .home-container {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        text-align: center;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
     }
-
-    .tiger-image {
-    width: 250px; /* Adjusts the width for mobile devices */
-    }
-
+  
     .hero-section {
-        padding: 30px 0;
+      padding: 30px 0;
     }
-
+  
     .about-section, .services-section, .testimonials-section, .cta-section {
-        padding: 20px 0;
+      padding: 20px 0;
     }
-
+  
     .service-item {
-        padding: 10px;
-        margin: 10px 0;
+      padding: 10px;
+      margin: 10px 0;
     }
-
+  
     .btn {
-        padding: 8px 16px;
-        margin-top: 15px;
+      padding: 8px 16px;
+      margin-top: 15px;
     }
-}
+  }
+  

@@ -11,6 +11,7 @@ import {
 } from "firebase/storage";
 import useUserRole from "./useUserRole";
 import "../firebaseConfig";
+import "./css/Vendor.css";
 
 const Vendor = () => {
   const [vendor, setVendor] = useState(null);

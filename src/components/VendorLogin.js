@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { auth } from '../firebaseConfig';
+import React, { useState } from "react";
+import { auth } from "../firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import "./css/VendorLogin.css";
 
 const VendorLogin = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate(); // Hook to navigate
 
   const handleLogin = (e) => {
@@ -28,34 +29,42 @@ const VendorLogin = () => {
   };
 
   return (
-    <div>
-      <h2>Vendor Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <label>
+    <div className="vendor-login">
+      <h2 className="vl-h2">Vendor Login</h2>
+      {error && (
+        <p className="error-message" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
+      <form onSubmit={handleLogin} className="login-form">
+        <label className="email-label">
           Email:
           <input
             type="email"
+            className="email-input"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
         <br />
-        <label>
+        <label className="password-label">
           Password:
           <input
             type="password"
+            className="password-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" className="login-btn">
+          Login
+        </button>
       </form>
     </div>
   );
-}
+};
 
 export default VendorLogin;

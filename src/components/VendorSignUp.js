@@ -1,28 +1,26 @@
-import React, { useState } from 'react';
-import { auth } from '../firebaseConfig';
+import React, { useState } from "react";
+import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import "./css/VendorSignUp.css";
 
 const VendorSignUp = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [productCategories, setProductCategories] = useState('');
-  const [images, setImages] = useState('');
-  const [contactInformation, setContactInformation] = useState('');
-  const [locationInMarket, setLocationInMarket] = useState('');
-  const [passphrase, setPassphrase] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [productCategories, setProductCategories] = useState("");
+  const [images, setImages] = useState("");
+  const [contactInformation, setContactInformation] = useState("");
+  const [locationInMarket, setLocationInMarket] = useState("");
+  const [passphrase, setPassphrase] = useState("");
+  const [error, setError] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
-  const [LotNum, setLotNum] = useState('');
-  const [avatar, setAvatar] = useState('');
-
-
+  const [LotNum, setLotNum] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const correctPassphrase = process.env.REACT_APP_VENDOR_PASSPHRASE;
   const db = getFirestore();
-
 
   const handlePassphraseSubmit = (e) => {
     e.preventDefault();
@@ -50,7 +48,7 @@ const VendorSignUp = () => {
           avatar,
           LotNum,
           contactInformation,
-          locationInMarket
+          locationInMarket,
         };
         await setDoc(doc(db, "Vendors", user.uid), vendorProfile);
 
@@ -66,12 +64,16 @@ const VendorSignUp = () => {
   };
 
   return (
-    <div>
-      <h2>Vendor Sign-Up</h2>
-      {error && <p style={{color: 'red'}}>{error}</p>}
+    <div className="vendor-signup">
+      <h2 className="vs-h2">Vendor Sign-Up</h2>
+      {error && (
+        <p className="error-message" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
 
       {!isAuthorized ? (
-        <form onSubmit={handlePassphraseSubmit}>
+        <form onSubmit={handlePassphraseSubmit} className="passphrase-form">
           <label>
             Enter Passphrase:
             <input
@@ -79,115 +81,130 @@ const VendorSignUp = () => {
               value={passphrase}
               onChange={(e) => setPassphrase(e.target.value)}
               required
+              className="passphrase-input"
             />
           </label>
-          <br />
-          <button type="submit">Submit Passphrase</button>
+          <button type="submit" className="submit-passphrase-btn">
+            Submit Passphrase
+          </button>
         </form>
+
       ) : (
-        <form onSubmit={vendorSignUp}>
-          <label>
+        <form onSubmit={vendorSignUp} className="signup-form">
+          <label className="email-label">
             Email:
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              className="email-input"
             />
           </label>
           <br />
-          <label>
+          <label className="password-label">
             Password:
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              className="password-input"
             />
           </label>
-          <label>
+          <label className="name-label">
             Name:
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
+              className="name-input"
             />
           </label>
           <br />
 
-          <label>
+          <label className="description-label">
             Description:
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
+              className="description-textarea"
             />
           </label>
           <br />
 
-          <label>
+          <label className="product-categories-label">
             Product Categories:
             <input
               type="text"
               value={productCategories}
               onChange={(e) => setProductCategories(e.target.value)}
               required
+              className="product-categories-input"
             />
           </label>
           <br />
 
-          <div>
-          <label>Avatar:</label>
-          <input 
-            type="text"
-            value={avatar} 
-            onChange={e => setAvatar(e.target.value)}
-          />
-        </div>
+          <div className="avatar-section">
+            <label className="avatar-label">Avatar:</label>
+            <input
+              type="text"
+              value={avatar}
+              onChange={(e) => setAvatar(e.target.value)}
+              className="avatar-input"
+            />
+          </div>
 
-          <label>
+          <label className="images-label">
             Images (URLs):
             <input
               type="text"
               value={images}
               onChange={(e) => setImages(e.target.value)}
+              className="images-input"
             />
           </label>
           <br />
 
-          <label>
+          <label className="contact-info-label">
             Contact Information:
             <input
               type="text"
               value={contactInformation}
               onChange={(e) => setContactInformation(e.target.value)}
               required
+              className="contact-info-input"
             />
           </label>
           <br />
 
-          <label>
+          <label className="location-label">
             Location in Market:
             <input
               type="text"
               value={locationInMarket}
               onChange={(e) => setLocationInMarket(e.target.value)}
               required
+              className="location-input"
             />
           </label>
           <br />
-          <div>
-          <label>Lot Number:</label>
-          <input 
-            type="text"
-            value={LotNum} 
-            onChange={e => setLotNum(e.target.value)}
-            required
-          />
-        </div>
+          <div className="lot-number-section">
+            <label className="lot-number-label">Lot Number:</label>
+            <input
+              type="text"
+              value={LotNum}
+              onChange={(e) => setLotNum(e.target.value)}
+              required
+              className="lot-number-input"
+            />
+          </div>
 
-          <button type="submit">Sign Up</button>
+          <button type="submit" className="signup-btn">
+            Sign Up
+          </button>
         </form>
       )}
     </div>

@@ -1,0 +1,46 @@
+.vendor-page-container {
+    background-color: #FFBA24;
+    color: blue;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+  }
+  
+  .vendor-page-container h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .vendor-page-container p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .vendor-page-container img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive adjustments for mobile devices */
+  @media (max-width: 768px) {
+    .vendor-page-container h2 {
+      font-size: 1.5rem;
+    }
+  
+    .vendor-page-container p {
+      font-size: 1rem; /* Adjust paragraph size for readability on small screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .vendor-page-container h2 {
+      font-size: 1.3rem; /* Smaller heading size for very small screens */
+    }
+  
+    .vendor-page-container p {
+      font-size: 0.9rem; /* Smaller paragraph size for very small screens */
+    }
+  }
+  
