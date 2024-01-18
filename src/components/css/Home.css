@@ -2,12 +2,39 @@
 body {
     background-color: #FFBA24;
   }
+
+  /* Add this CSS to your existing styles */
+.map-container {
+    display: flex;
+    justify-content: space-between; /* Adjust as needed */
+    align-items: center; /* Center align the elements */
+    
+  }
+  
+  /* If you want to control the width of each element individually, you can use CSS classes */
+  .map-container .GoogleMap {
+    flex: 1; /* This will make the GoogleMap take up 50% of the width */
+    margin-right: 10px; /* Adjust the margin as needed for spacing */
+  }
+  
+  .map-container .FacebookPageEmbed {
+    flex: 1; /* This will make the FacebookPageEmbed take up 50% of the width */
+    margin-left: 20px; /* Adjust the margin as needed for spacing */
+  }
+  
   
   .home-container {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Merriweather', serif;
+    color: white; /* Inner color */
+    -webkit-text-stroke: 1px blue; /* Stroke effect for Webkit browsers */
+    text-shadow:
+      1px 1px 0 blue, /* Horizontal and vertical shadow */
+      -1px -1px 0 blue, /* Horizontal and vertical shadow */
+      -1px 1px 0 blue, /* Horizontal and vertical shadow */
+      1px -1px 0 blue; /* Horizontal and vertical shadow */
     padding: 20px;
     background-color: #FFBA24;
-    color: blue; /* Text color set to blue */
+    font-weight: bolder;
   }
   
   .image-section {
@@ -37,9 +64,13 @@ body {
       -1px -1px 0 blue, /* Horizontal and vertical shadow */
       -1px 1px 0 blue, /* Horizontal and vertical shadow */
       1px -1px 0 blue; /* Horizontal and vertical shadow */
+    font-family: 'Merriweather', serif;
+    font-size: 3.5em;
   }
   
   .highlights p, .highlights li {
+    font-family: 'Merriweather', serif;
+    font-size: 1.5em;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for smaller text */
   }
   
@@ -79,7 +110,8 @@ body {
   }
   
   .btn-primary {
-    background-color: #007bff;
+    /* background-color: #007bff; */
+    background-color: #28a745;
     color: white;
   }
   
@@ -116,6 +148,12 @@ body {
     .btn {
       padding: 8px 16px;
       margin-top: 15px;
+    }
+    
+    .map-container {
+        flex-direction: column; /* Stack the elements on top of each other on mobile screens */
+        align-items: center; /* Center align the elements vertically on mobile screens */
+        justify-content: center; /* Center align the elements horizontally on mobile screens */
     }
   }
   

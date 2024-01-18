@@ -18,8 +18,8 @@ import "./css/Home.css";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [featuredVendors, setFeaturedVendors] = useState([]);
- // const [ourVendors, setOurVendors] = useState([]);
- // const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
+  // const [ourVendors, setOurVendors] = useState([]);
+  // const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
   const [allVendors, setAllVendors] = useState([]); // new state for all vendors (for admin)
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
   const [filteredVendors, setFilteredVendors] = useState([]); // State for filtered vendor list
@@ -44,7 +44,7 @@ const Home = () => {
         id: doc.id,
         ...doc.data(),
       }));
-     // setOurVendors(allVendors);
+      // setOurVendors(allVendors);
       setFeaturedVendors(allVendors.filter((vendor) => vendor.featured));
     };
 
@@ -62,7 +62,7 @@ const Home = () => {
     }
   }, [userRole, db]);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVendorIndex((prevIndex) => (prevIndex + 1) % ourVendors.length);
     }, 5000); // Change 3000 to the duration you want for each vendor display (in milliseconds)
@@ -218,11 +218,10 @@ const Home = () => {
       <br />
       {/* Location */}
 
-      <GoogleMap />
-
-      {/* Location */}
-
-      <FacebookPageEmbed />
+      <div className="map-container">
+        <GoogleMap />
+        <FacebookPageEmbed />
+      </div>
 
       {/* Admin Interface to Select Featured Vendors */}
       {userRole === "Admin" && (
@@ -272,7 +271,6 @@ const Home = () => {
         </section>
       )}
 
-
       {/* Featured Vendors Section */}
       <section className="featured-vendors">
         <h2>Featured Vendors</h2>
@@ -304,7 +302,7 @@ const Home = () => {
       </section>
 
       {/* Our Vendors Section */}
-{/*       <section className="our-vendors">
+      {/*       <section className="our-vendors">
         <h2>Our Vendors</h2>
         {ourVendors.length === 0 ? (
           <p>Check out our amazing vendors!</p>

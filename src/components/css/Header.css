@@ -8,6 +8,10 @@ nav {
     font-family: 'Arial', sans-serif;
 }
 
+header {
+    z-index: 3; /* Ensure the header stays above other elements */
+  }
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -60,5 +64,13 @@ nav {
 
     nav.open .menu-items {
         display: flex; /* Show menu items when mobile menu is open */
+    }
+
+    /* Keep the header above the mobile menu */
+    nav.open {
+        z-index: 2;
+        background-color: #f2f2f2;
+        position: fixed;
+        width: 100%;
     }
 }
