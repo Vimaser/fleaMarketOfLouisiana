@@ -18,8 +18,8 @@ import "./css/Home.css";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [featuredVendors, setFeaturedVendors] = useState([]);
-  const [ourVendors, setOurVendors] = useState([]);
-  const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
+ // const [ourVendors, setOurVendors] = useState([]);
+ // const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
   const [allVendors, setAllVendors] = useState([]); // new state for all vendors (for admin)
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
   const [filteredVendors, setFilteredVendors] = useState([]); // State for filtered vendor list
@@ -44,7 +44,7 @@ const Home = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      setOurVendors(allVendors);
+     // setOurVendors(allVendors);
       setFeaturedVendors(allVendors.filter((vendor) => vendor.featured));
     };
 
@@ -62,13 +62,13 @@ const Home = () => {
     }
   }, [userRole, db]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVendorIndex((prevIndex) => (prevIndex + 1) % ourVendors.length);
     }, 5000); // Change 3000 to the duration you want for each vendor display (in milliseconds)
 
     return () => clearInterval(interval);
-  }, [ourVendors.length]);
+  }, [ourVendors.length]); */
 
   useEffect(() => {
     // Filter vendors based on search query
@@ -216,6 +216,13 @@ const Home = () => {
       </section>
 
       <br />
+      {/* Location */}
+
+      <GoogleMap />
+
+      {/* Location */}
+
+      <FacebookPageEmbed />
 
       {/* Admin Interface to Select Featured Vendors */}
       {userRole === "Admin" && (
@@ -265,13 +272,6 @@ const Home = () => {
         </section>
       )}
 
-      {/* Location */}
-
-      <GoogleMap />
-
-      {/* Location */}
-
-      <FacebookPageEmbed />
 
       {/* Featured Vendors Section */}
       <section className="featured-vendors">
@@ -304,7 +304,7 @@ const Home = () => {
       </section>
 
       {/* Our Vendors Section */}
-      <section className="our-vendors">
+{/*       <section className="our-vendors">
         <h2>Our Vendors</h2>
         {ourVendors.length === 0 ? (
           <p>Check out our amazing vendors!</p>
@@ -329,7 +329,7 @@ const Home = () => {
             <p>Lot Number: {ourVendors[currentVendorIndex].lotNum}</p>
           </div>
         )}
-      </section>
+      </section> */}
 
       {/* Additional Sections as needed */}
     </div>

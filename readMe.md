@@ -249,4 +249,4 @@ Update your project documentation to reflect any new features or significant cha
 5:47 PM
 Wednesday, January 17, 2024 (CST)
 
-Working on Thursday, but I can begin CSS. Site is functional and testing is alomst complete. I still need to set up Vendor links to their facebook, website, and embedding images on the VendorPage. This was a large project, but I'm proud of it!
+Working on Thursday, but I can begin CSS. Site is functional and testing is alomst complete. I still need to set up Vendor links to their facebook, website, and embedding images on the VendorPage. This was a large project for a single person to knock out in two weeks, but I'm proud of it!
