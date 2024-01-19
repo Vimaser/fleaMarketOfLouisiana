@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import "../firebaseConfig";
 import useUserRole from "./useUserRole";
-import img from "../img/fleabro-2.gif";
+import img from "../img/fleabro-4.gif";
 import GoogleMap from "./GoogleMap";
 import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";

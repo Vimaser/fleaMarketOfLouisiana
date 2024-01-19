@@ -1,76 +1,78 @@
-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f2f2f2;
-    padding: 10px 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+.header-container {
+    background-color: rgba(33, 37, 41, 0.8); /* Opaque dark gray */
 }
 
-header {
-    z-index: 3; /* Ensure the header stays above other elements */
-  }
+.header-container .pure-menu-list {
+    display: flex; /* Aligns the list items in a row */
+    padding-left: 0; /* Removes default padding */
+    list-style-type: none; /* Removes default list styling */
+    justify-content: center; /* Center align items */
+    align-items: center; /* Vertical centering */
+}
+
+.header-container .pure-menu-item {
+    margin-right: 10px; /* Space between items */
+}
+
+/* Default color for menu links */
+.pure-menu-horizontal .pure-menu-link, .pure-menu-horizontal .pure-menu-item {
+    color: white; /* White text for menu items */
+}
+
+/* Active menu item color */
+.header-container .pure-menu-item.active .pure-menu-link {
+    color: blue; /* Blue text for active menu item */
+}
 
 .hamburger {
     display: none;
-    flex-direction: column;
     cursor: pointer;
-    width: 24px;
 }
 
-.hamburger div {
-    height: 3px;
-    background-color: #333;
-    margin: 2px 0;
-    transition: 0.4s;
+.hamburger span {
+    display: block;
+    height: 2px;
+    background-color: blue; /* Blue lines for hamburger */
+    margin: 5px 0;
 }
 
-.menu-items {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center align the menu items */
+.nav-button {
+    background-color: rgba(50, 50, 50, 0.8); /* Darker shade of opaque gray */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for size */
+    border: none; /* Removes border */
+    border-radius: 4px; /* Rounded corners */
+    text-align: center;
+    text-decoration: none; /* Removes underline */
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Cursor to pointer on hover */
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* Modern font */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
-.menu-items a, .menu-items button {
-    color: #333;
-    margin: 0 10px;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+.nav-button:hover {
+    background-color: rgba(70, 122, 255, 0.8); /* Slightly darker on hover */
 }
 
-.menu-items a:hover, .menu-items button:hover {
-    background-color: #e6e6e6;
+.active-link {
+    background-color: rgba(70, 122, 255, 0.8);
+    color: rgb(206, 224, 233) !important; /* Temporarily added for debugging */
 }
 
-.menu-items a.active, .menu-items button.active {
-    background-color: #007bff;
-    color: #fff;
-}
 
-/* Mobile view styles */
-@media only screen and (max-width: 768px) {
-    .menu-items {
-        flex-direction: column;
-        width: 100%;
-        display: none; /* Hide menu items by default in mobile view */
-    }
-
+@media (max-width: 768px) {s
     .hamburger {
-        display: flex;
+        display: block;
     }
 
-    nav.open .menu-items {
-        display: flex; /* Show menu items when mobile menu is open */
+    .pure-menu-list {
+        display: none;
     }
 
-    /* Keep the header above the mobile menu */
-    nav.open {
-        z-index: 2;
-        background-color: #f2f2f2;
-        position: fixed;
-        width: 100%;
+    .pure-menu-list.active {
+        display: block;
     }
 }
+

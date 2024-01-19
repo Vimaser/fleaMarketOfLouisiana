@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import "./css/Header.css";
-import "./css/darkMode.css";
+// import "./css/darkMode.css";
 
 const Header = () => {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
+  // const [darkMode, setDarkMode] = useState(false);
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const toggleDarkMode = () => {
+  /*   const toggleDarkMode = () => {
     setDarkMode((prevMode) => {
       if (!prevMode) {
         document.body.setAttribute("data-dark", "true");
@@ -20,19 +21,13 @@ const Header = () => {
       }
       return !prevMode;
     });
-  };
+  }; */
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
   useEffect(() => {
-    if (darkMode) {
-      document.body.setAttribute("data-dark", "true");
-    } else {
-      document.body.removeAttribute("data-dark");
-    }
-
     const auth = getAuth();
     const db = getFirestore();
 
@@ -59,79 +54,168 @@ const Header = () => {
     });
 
     return () => unsubscribe();
-  }, [darkMode]);
+  }, []); // Removed darkMode from dependency array
 
   return (
-    <nav className={mobileMenuOpen ? "open" : ""}>
-      <div className="hamburger" onClick={toggleMobileMenu}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <div className="menu-items">
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "active" : undefined)}
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/FAQs"
-          className={({ isActive }) => (isActive ? "active" : undefined)}
-        >
-          FAQs
-        </NavLink>
-        <NavLink to="/blog" activeClassName="active">
-          Blog
-        </NavLink>
-        <NavLink to="/contact" activeClassName="active">
-          Contact
-        </NavLink>
-        <NavLink to="/map" activeClassName="active">
-          Map
-        </NavLink>
-        <NavLink to="/search" activeClassName="active">
-          Search Vendors
-        </NavLink>
-        {user ? (
-          <NavLink to={`/vendor/${user.uid}`} activeClassName="active">
-            Vendor
-          </NavLink>
-        ) : (
-          <>
-            <NavLink to="/VendorLogin" activeClassName="active">
-              Vendor Login
+    <div className="header-container">
+      <nav
+        className={`pure-menu pure-menu-horizontal ${
+          mobileMenuOpen ? "open" : ""
+        }`}
+      >
+        <div className="hamburger" onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul className={`pure-menu-list ${mobileMenuOpen ? "active" : ""}`}>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/" ? "active-link" : ""
+              }`}
+            >
+              Home
             </NavLink>
-            <NavLink to="/VendorSignUp" activeClassName="active">
-              Vendor SignUp
+          </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/FAQs"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/FAQs" ? "active-link" : ""
+              }`}
+            >
+              FAQs
             </NavLink>
-          </>
-        )}
-
-        {userRole === "Admin" && (
-          <>
-            <NavLink to="/AdminPortal" activeClassName="active">
-              Admin Portal
+          </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/blog"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/blog" ? "active-link" : ""
+              }`}
+            >
+              Blog
             </NavLink>
-            <NavLink to="/messages" activeClassName="active">
-              Messages
+          </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/contact"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/contact" ? "active-link" : ""
+              }`}
+            >
+              Contact
             </NavLink>
-          </>
-        )}
-
-        {user ? (
-          <>
-            <NavLink to="/logout" activeClassName="active">
-              Logout
+          </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/map"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/map" ? "active-link" : ""
+              }`}
+            >
+              Map
             </NavLink>
-          </>
-        ) : (
-          <NavLink to="/login" activeClassName="active"></NavLink>
-        )}
-        <button onClick={toggleDarkMode}>{darkMode ? "Light" : "Dark"}</button>
-      </div>
-    </nav>
+          </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/search"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/search" ? "active-link" : ""
+              }`}
+            >
+              Search Vendors
+            </NavLink>
+          </li>
+          {user ? (
+            <li className="pure-menu-item">
+              <NavLink
+                to={`/vendor/${user.uid}`}
+                className={`pure-menu-link nav-button ${
+                  location.pathname === `/vendor/${user.uid}`
+                    ? "active-link"
+                    : ""
+                }`}
+              >
+                Vendor
+              </NavLink>
+            </li>
+          ) : (
+            <>
+              <li className="pure-menu-item">
+                <NavLink
+                  to="/VendorLogin"
+                  className={`pure-menu-link nav-button ${
+                    location.pathname === "/VendorLogin" ? "active-link" : ""
+                  }`}
+                >
+                  Vendor Login
+                </NavLink>
+              </li>
+              <li className="pure-menu-item">
+                <NavLink
+                  to="/VendorSignUp"
+                  className={`pure-menu-link nav-button ${
+                    location.pathname === "/VendorSignUp" ? "active-link" : ""
+                  }`}
+                >
+                  Vendor SignUp
+                </NavLink>
+              </li>
+            </>
+          )}
+          {userRole === "Admin" && (
+            <>
+              <li className="pure-menu-item">
+                <NavLink
+                  to="/AdminPortal"
+                  className={`pure-menu-link nav-button ${
+                    location.pathname === "/AdminPortal" ? "active-link" : ""
+                  }`}
+                >
+                  Admin Portal
+                </NavLink>
+              </li>
+              <li className="pure-menu-item">
+                <NavLink
+                  to="/messages"
+                  className={`pure-menu-link nav-button ${
+                    location.pathname === "/messages" ? "active-link" : ""
+                  }`}
+                >
+                  Messages
+                </NavLink>
+              </li>
+            </>
+          )}
+          {user ? (
+            <li className="pure-menu-item">
+              <NavLink
+                to="/logout"
+                className={`pure-menu-link nav-button ${
+                  location.pathname === "/logout" ? "active-link" : ""
+                }`}
+              >
+                Logout
+              </NavLink>
+            </li>
+          ) : (
+            <li className="pure-menu-item">
+              <NavLink
+                to="/login"
+                className={`pure-menu-link nav-button ${
+                  location.pathname === "/login" ? "active-link" : ""
+                }`}
+              >
+                Login
+              </NavLink>
+            </li>
+          )}
+        </ul>
+      </nav>
+    </div>
   );
 };
-
 export default Header;
