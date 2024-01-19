@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import "../firebaseConfig";
 import useUserRole from "./useUserRole";
-import img from "../img/fleabro1.gif";
+import img from "../img/fleabro-2.gif";
 import GoogleMap from "./GoogleMap";
 import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";
@@ -149,8 +149,10 @@ const Home = () => {
 
       {/* Highlights Section */}
       <section className="highlights">
-        <h2>Market Highlights</h2>
+        <h2>Market Highlights</h2> 
+        <br/>
         <p>Explore the best of our flea market!</p>
+       
         <ul>
           <li>Major Highway location just south of BATON ROUGE</li>
           <li>FREE Parking - FREE Admission</li>
