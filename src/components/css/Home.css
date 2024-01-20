@@ -22,16 +22,16 @@ body {
     margin-left: 20px; /* Adjust the margin as needed for spacing */
   }
   
-  
+/*   -webkit-text-stroke: 1px blue;
+    text-shadow:
+      1px 1px 0 blue, 
+      -1px -1px 0 blue,
+      -1px 1px 0 blue, 
+      1px -1px 0 blue;  */
   .home-container {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
     color: blue; /* Inner color */
-    -webkit-text-stroke: 1px blue; /* Stroke effect for Webkit browsers */
-    text-shadow:
-      1px 1px 0 blue, /* Horizontal and vertical shadow */
-      -1px -1px 0 blue, /* Horizontal and vertical shadow */
-      -1px 1px 0 blue, /* Horizontal and vertical shadow */
-      1px -1px 0 blue; /* Horizontal and vertical shadow */
+   
     padding: 20px;
     background-color: #FFBA24;
 
@@ -95,21 +95,79 @@ body {
     margin-bottom: 10px; /* Spacing between list items */
   }
   
-  .upcoming-events, .admin-vendor-selection, .featured-vendors {
-    padding: 20px 0;
-  }
-  
-  .event-item {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .event-image {
-    max-width: 100px; /* Adjust as needed */
-    height: auto; /* Maintain aspect ratio */
-    margin-top: 10px;
-  }
+/* EVENT STYLING */
+
+.events-container, .upcoming-events {
+  background-color: #fff; /* White background for contrast */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.events-container {
+  background-color: #FFBA24; /* Specific background for .events-container */
+}
+
+.upcoming-events h2, .event-title {
+  color: #333; /* Dark gray color for headings */
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+.event-item {
+  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+}
+
+.event-details {
+  margin-bottom: 10px;
+}
+
+.event-date, .event-time, .event-location, .event-description {
+  color: #333333; /* Dark gray for text */
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-size: 0.9em;
+  display: block; /* Each detail on a new line */
+}
+
+.event-description {
+  color: #333333; /* Keeping description same as other text */
+  margin: 10px 0;
+}
+
+.event-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  max-width: 100px; /* Adjust as needed */
+  margin-top: 10px;
+}
+
+.event-link {
+  background-color: #007bff; /* A harmonious blue */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.event-link:hover {
+  background-color: #0056b3; /* Darker shade of blue for hover state */
+}
+
+/* Additional styling for admin-vendor-selection, featured-vendors as needed */
+.admin-vendor-selection, .featured-vendors {
+  padding: 20px 0;
+}
+
+
   
   /* Button styles retained from your existing CSS */
   .btn {
@@ -134,7 +192,10 @@ body {
     display: flex;
     justify-content: space-between;
   }
-  
+  .highlights, .events {
+    flex: 1; /* Adjust as needed, ensures equal width */
+    /* Add any necessary padding or margins */
+  }
   
   /* Mobile Styles */
   @media only screen and (max-width: 768px) {
@@ -191,6 +252,10 @@ body {
       font-size: 4.0em;
       word-spacing: 10px;
       letter-spacing: 2px;
+    }
+
+    .content-wrapper {
+      flex-direction: column;
     }
   }
   

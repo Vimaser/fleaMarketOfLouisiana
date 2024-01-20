@@ -14,6 +14,7 @@ import img from "../img/fleabro-4.gif";
 import GoogleMap from "./GoogleMap";
 import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";
+import './css/Events.css';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
