@@ -1,0 +1,13 @@
+.google-map-container {
+    max-width: 100%; /* Limit the width */
+    margin: auto; /* Center it if needed */
+    padding: 20px; /* Add some padding around the map */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.google-map-container iframe {
+    width: 100%; /* Make the map width responsive */
+    max-width: 600px; /* Maximum width */
+    height: 450px; /* Fixed height */
+    border: none; /* Remove border */
+}

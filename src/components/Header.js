@@ -27,6 +27,10 @@ const Header = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   useEffect(() => {
     const auth = getAuth();
     const db = getFirestore();
@@ -75,6 +79,7 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
               Home
             </NavLink>
@@ -85,6 +90,7 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/FAQs" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
               FAQs
             </NavLink>
@@ -95,6 +101,7 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/blog" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
               Blog
             </NavLink>
@@ -105,6 +112,7 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/contact" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
               Contact
             </NavLink>
@@ -115,6 +123,7 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/map" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
               Map
             </NavLink>
@@ -125,8 +134,9 @@ const Header = () => {
               className={`pure-menu-link nav-button ${
                 location.pathname === "/search" ? "active-link" : ""
               }`}
+              onClick={closeMobileMenu}
             >
-              Search Vendors
+              Search
             </NavLink>
           </li>
           {user ? (
@@ -138,6 +148,7 @@ const Header = () => {
                     ? "active-link"
                     : ""
                 }`}
+                onClick={closeMobileMenu}
               >
                 Vendor
               </NavLink>
@@ -150,8 +161,9 @@ const Header = () => {
                   className={`pure-menu-link nav-button ${
                     location.pathname === "/VendorLogin" ? "active-link" : ""
                   }`}
+                  onClick={closeMobileMenu}
                 >
-                  Vendor Login
+                  Login
                 </NavLink>
               </li>
               <li className="pure-menu-item">
@@ -160,8 +172,9 @@ const Header = () => {
                   className={`pure-menu-link nav-button ${
                     location.pathname === "/VendorSignUp" ? "active-link" : ""
                   }`}
+                  onClick={closeMobileMenu}
                 >
-                  Vendor SignUp
+                  Sign-Up
                 </NavLink>
               </li>
             </>
@@ -174,8 +187,9 @@ const Header = () => {
                   className={`pure-menu-link nav-button ${
                     location.pathname === "/AdminPortal" ? "active-link" : ""
                   }`}
+                  onClick={closeMobileMenu}
                 >
-                  Admin Portal
+                  Admin
                 </NavLink>
               </li>
               <li className="pure-menu-item">
@@ -184,6 +198,7 @@ const Header = () => {
                   className={`pure-menu-link nav-button ${
                     location.pathname === "/messages" ? "active-link" : ""
                   }`}
+                  onClick={closeMobileMenu}
                 >
                   Messages
                 </NavLink>
@@ -197,6 +212,7 @@ const Header = () => {
                 className={`pure-menu-link nav-button ${
                   location.pathname === "/logout" ? "active-link" : ""
                 }`}
+                onClick={closeMobileMenu}
               >
                 Logout
               </NavLink>
@@ -208,6 +224,7 @@ const Header = () => {
                 className={`pure-menu-link nav-button ${
                   location.pathname === "/login" ? "active-link" : ""
                 }`}
+                onClick={closeMobileMenu}
               >
                 Login
               </NavLink>
@@ -218,4 +235,5 @@ const Header = () => {
     </div>
   );
 };
+
 export default Header;

@@ -70,6 +70,8 @@ body {
     font-weight: 700; 
     line-height: 26.4px;
     font-size: 4.0em;
+    word-spacing: 10px;
+      letter-spacing: 2px;
   }
   
   .highlights p, .highlights li {
@@ -127,6 +129,12 @@ body {
     background-color: #28a745;
     color: white;
   }
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  
   
   /* Mobile Styles */
   @media only screen and (max-width: 768px) {
@@ -162,6 +170,27 @@ body {
         flex-direction: column; /* Stack the elements on top of each other on mobile screens */
         align-items: center; /* Center align the elements vertically on mobile screens */
         justify-content: center; /* Center align the elements horizontally on mobile screens */
+    }
+
+    .highlights h2 span::after {
+      content: '\A';
+      white-space: pre;
+    }
+
+    .highlights h2 {
+      margin-bottom: 10px;
+      color: blue; /* Inner color */
+      font-family: "Gill Sans", 
+      "Gill Sans MT", 
+      Calibri, sans-serif; 
+      font-size: 32px; 
+      font-style: normal; 
+      font-variant: normal; 
+      font-weight: 700; 
+      line-height: 26.4px;
+      font-size: 4.0em;
+      word-spacing: 10px;
+      letter-spacing: 2px;
     }
   }
   

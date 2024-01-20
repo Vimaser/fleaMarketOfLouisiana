@@ -25,6 +25,8 @@ const Home = () => {
   const [filteredVendors, setFilteredVendors] = useState([]); // State for filtered vendor list
   const [selectedFeaturedVendor, setSelectedFeaturedVendor] = useState("");
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Look, CSS is being annoying. Don't judge me!
+
   const userRole = useUserRole();
   const db = getFirestore();
 
@@ -84,6 +86,15 @@ const Home = () => {
 
     setFilteredVendors(filteredVendors);
   }, [searchQuery, allVendors]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const deleteEvent = async (eventId) => {
     if (userRole === "Admin") {
@@ -146,76 +157,86 @@ const Home = () => {
       <section className="image-section">
         <img src={img} alt="FleaBro" />
       </section>
+      <div class="content-wrapper">
+        {/* Highlights Section */}
+        <section className="highlights">
+          <h2>
+            <span>Market</span> {isMobile && <br />} Highlights
+          </h2>
+          <br />
+          <p>Explore the best of our flea market!</p>
 
-      {/* Highlights Section */}
-      <section className="highlights">
-        <h2>Market Highlights</h2> 
-        <br/>
-        <p>Explore the best of our flea market!</p>
-       
-        <ul>
-          <li>Major Highway location just south of BATON ROUGE</li>
-          <li>FREE Parking - FREE Admission</li>
-          <li>Clean Restrooms</li>
-          <li>Great Food & Beverages</li>
-          <li>Family Atmosphere</li>
-          <li>400 Spaces under one roof!</li>
-          <li>Open Every Saturday & Sunday - Rain or Shine</li>
-          <li>A Modern old-fashioned Flea Market!</li>
-        </ul>
-      </section>
-
-      {/* Upcoming Events Section */}
-      <section className="upcoming-events">
-        <h2>Upcoming Events</h2>
-        {events.length === 0 ? (
-          <p>No upcoming events.</p>
-        ) : (
           <ul>
-            {events.map((event) => (
-              <li key={event.id} className="event-item">
-                <div className="event-details">
-                  <h3 className="event-title">{event.title}</h3>
-                  <span className="event-date">{event.date}</span>
-                  <span className="event-time">{event.time}</span>
-                  <p className="event-description">{event.description}</p>
-                  {event.image && (
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="event-image"
-                    />
-                  )}
-                  <p className="event-location">{event.location}</p>
-                  {event.link && (
-                    <a
-                      href={event.link}
-                      className="event-link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      More Info
-                    </a>
-                  )}
-                </div>
-                {userRole === "Admin" && (
-                  <button
-                    onClick={() => deleteEvent(event.id)}
-                    className="delete-event-button"
-                  >
-                    Delete
-                  </button>
-                )}
-              </li>
-            ))}
+            <li>
+              Welcome to our vibrant flea market, a treasure trove located just
+              south of Baton Rouge, accessible directly off a major highway.
+              We're thrilled to offer an experience that combines modern
+              convenience with the charm of old-fashioned market shopping. Our
+              market features 400 unique spaces, all under one roof, ensuring a
+              delightful exploration rain or shine, every Saturday and Sunday.
+              One of the best parts? Enjoy completely free parking and
+              admission! We pride ourselves on maintaining clean restrooms,
+              providing a range of delicious food and beverages, and fostering a
+              family-friendly atmosphere. It's more than just a shopping
+              destination; it's a place where community and culture come alive.
+              Don't miss out on the chance to discover something special at our
+              modern, yet old-fashioned flea market!
+            </li>
           </ul>
-        )}
-        {userRole === "Admin" && (
-          <Link className="create-link" to="/CreateEvents">
-            Create Event
-          </Link>
-        )}
-      </section>
+        </section>
+
+        {/* Upcoming Events Section */}
+        <section className="upcoming-events">
+          <h2>Upcoming Events</h2>
+          {events.length === 0 ? (
+            <p>No upcoming events.</p>
+          ) : (
+            <ul>
+              {events.map((event) => (
+                <li key={event.id} className="event-item">
+                  <div className="event-details">
+                    <h3 className="event-title">{event.title}</h3>
+                    <span className="event-date">{event.date}</span>
+                    <span className="event-time">{event.time}</span>
+                    <p className="event-description">{event.description}</p>
+                    {event.image && (
+                      <img
+                        src={event.image}
+                        alt={event.title}
+                        className="event-image"
+                      />
+                    )}
+                    <p className="event-location">{event.location}</p>
+                    {event.link && (
+                      <a
+                        href={event.link}
+                        className="event-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        More Info
+                      </a>
+                    )}
+                  </div>
+                  {userRole === "Admin" && (
+                    <button
+                      onClick={() => deleteEvent(event.id)}
+                      className="delete-event-button"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+          {userRole === "Admin" && (
+            <Link className="create-link" to="/CreateEvents">
+              Create Event
+            </Link>
+          )}
+        </section>
+      </div>
 
       <br />
       {/* Location */}

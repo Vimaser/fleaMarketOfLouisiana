@@ -1,5 +1,10 @@
 .header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background-color: rgba(33, 37, 41, 0.8); /* Opaque dark gray */
+    z-index: 100;
 }
 
 .header-container .pure-menu-list {
@@ -27,13 +32,19 @@
 .hamburger {
     display: none;
     cursor: pointer;
+    justify-content: center; 
+    align-items: center;
+    height: 40px; 
 }
 
 .hamburger span {
     display: block;
+    justify-content: center; 
+    align-items: center;
+    width: 30px;
     height: 2px;
-    background-color: blue; /* Blue lines for hamburger */
-    margin: 5px 0;
+    background-color: white;
+    margin: 4px 0;
 }
 
 .nav-button {
@@ -62,17 +73,35 @@
 }
 
 
-@media (max-width: 768px) {s
+@media (max-width: 768px) {
     .hamburger {
-        display: block;
+        display: flex;
     }
 
-    .pure-menu-list {
+    .header-container .pure-menu-list {
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        right: 0;
+        background-color: rgba(33, 37, 41, 0.8); /* Same as header background */
         display: none;
+        flex-direction: column; /* Stack items vertically */
+        align-items: start; /* Align items to the start */
+        padding: 10px; /* Add some padding */
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: translateY(-100%); /* Start off-screen */
+        opacity: 0; /* Start hidden */
     }
 
-    .pure-menu-list.active {
-        display: block;
+    .header-container .pure-menu-list.active {
+        display: flex; /* Display as flexbox when active */
+        transform: translateY(0); /* Slide to visible position */
+        opacity: 1; /* Fully visible */
+    }
+
+    .header-container .pure-menu-item {
+        margin-right: 0; /* Remove margin between items */
+        margin-bottom: 10px; /* Space between items */
     }
 }
 

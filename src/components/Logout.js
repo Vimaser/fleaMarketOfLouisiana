@@ -1,14 +1,19 @@
 import React from "react";
 import { getAuth, signOut } from "firebase/auth";
-import '../firebaseConfig';
+import { useNavigate } from "react-router-dom";
+import "../firebaseConfig";
+import "./css/Logout.css";
 
 const Logout = () => {
+  const navigate = useNavigate();
+
   const handleLogout = async () => {
     const auth = getAuth();
 
     try {
       await signOut(auth);
-      alert("You have successfully logged out.");
+      alert("Later gater ;)");
+      navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
       alert("Error during logout.");
@@ -16,8 +21,10 @@ const Logout = () => {
   };
 
   return (
-    <div className="logout">
-      <button onClick={handleLogout}>Logout</button>
+    <div className="logout-container">
+      <button className="logout-button" onClick={handleLogout}>
+        Logout?
+      </button>
     </div>
   );
 };
