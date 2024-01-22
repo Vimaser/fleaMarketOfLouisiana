@@ -11,7 +11,7 @@
 .blog-container > h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
-    color: #333;
+    color: #000000;
     text-align: center;
     border-bottom: 2px solid #f2f2f2;
     padding-bottom: 10px;
@@ -20,20 +20,20 @@
 /* Individual Post Styling */
 .blog-post h3 {
     font-size: 2rem;
-    color: #444;
+    color: #060606;
     margin-bottom: 10px;
 }
 
 .blog-post h4 {
     font-size: 1.4rem;
-    color: #666;
+    color: #1e1e1e;
     margin-bottom: 20px;
     font-style: italic;
 }
 
 .blog-post p {
     font-size: 1.1rem;
-    color: #777;
+    color: #212121;
     margin-bottom: 20px;
 }
 

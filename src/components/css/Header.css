@@ -5,6 +5,11 @@
     right: 0;
     background-color: rgba(33, 37, 41, 0.8); /* Opaque dark gray */
     z-index: 100;
+    transition: top 0.3s ease; /* Smooth transition for top property */
+}
+
+.header-container.top-header-not-active {
+    top: -80px; /* Adjust this value to hide the top-header */
 }
 
 .header-container .pure-menu-list {
@@ -13,18 +18,22 @@
     list-style-type: none; /* Removes default list styling */
     justify-content: center; /* Center align items */
     align-items: center; /* Vertical centering */
+    margin-top: 0; /* No margin when top-header is not active */
+    transition: margin-top 0.3s ease; /* Smooth transition for margin-top */
+}
+
+.header-container:not(.top-header-not-active) .pure-menu-list {
+    margin-top: 90px; /* Adjust based on the height of your top-header */
 }
 
 .header-container .pure-menu-item {
     margin-right: 10px; /* Space between items */
 }
 
-/* Default color for menu links */
 .pure-menu-horizontal .pure-menu-link, .pure-menu-horizontal .pure-menu-item {
     color: white; /* White text for menu items */
 }
 
-/* Active menu item color */
 .header-container .pure-menu-item.active .pure-menu-link {
     color: blue; /* Blue text for active menu item */
 }
@@ -69,17 +78,72 @@
 
 .active-link {
     background-color: rgba(70, 122, 255, 0.8);
-    color: rgb(206, 224, 233) !important; /* Temporarily added for debugging */
+    color: rgba(0, 0, 0, 0.8); /* Temporarily added for debugging */
 }
 
+.logo-container {
+    /* Logo on the left */
+    float: left;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align items to the right */
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px; /* Adjust as needed */
+}
+
+.time {
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
+    color: black;
+    text-align: center;
+}
+
+.social-media-links {
+    /* Additional styling */
+    margin-top: 5px; /* Space between times and social media links */
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2px 5px;
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px; /* Adjust height as needed */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.top-header-active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.header-container.top-header-not-active .top-header {
+    transform: translateY(-100%);
+    opacity: 0;
+}
 
 @media (max-width: 768px) {
+    .top-header {
+        display: none;
+    }
+
     .hamburger {
         display: flex;
     }
 
     .header-container .pure-menu-list {
-        position: absolute;
+        position: static;
         top: 100%; /* Position below the header */
         left: 0;
         right: 0;
@@ -104,4 +168,3 @@
         margin-bottom: 10px; /* Space between items */
     }
 }
-
