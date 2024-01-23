@@ -7,8 +7,8 @@ const Gallery = ({ userRole }) => {
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  //  const [selectedImage, setSelectedImage] = useState(null);
+   // const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         const fetchImages = async () => {
