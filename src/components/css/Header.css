@@ -153,8 +153,8 @@
         justify-content: center; /* Center align items */
         padding: 10px; /* Add some padding */
         transition: transform 0.3s ease, opacity 0.3s ease;
-        transform: translateY(-100%); /* Start off-screen */
-        opacity: 0; /* Start hidden */
+        transform: translateY(-100%); 
+        opacity: 0; 
     }
 
     .header-container .pure-menu-list.active {

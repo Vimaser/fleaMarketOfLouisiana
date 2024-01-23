@@ -369,7 +369,9 @@ body {
 }
 
 .social-media-maps-container {
-  flex-direction: column;
+  flex-direction: column; /* Stack the items vertically on mobile */
+  align-items: stretch; /* Stretch items to take full width */
+  gap: 10px; /* Reduce gap for mobile layout */
 }
 
 .facebook-container, .google-maps-container {
