@@ -248,14 +248,74 @@ body {
   cursor: pointer;
 }
 
+/* Facebook Container Styles */
+.facebook-container {
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #fff; /* Optional: change as per your color scheme */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px; /* Adjust the width as per your layout requirements */
+  text-align: center;
+}
+
+/* Container for both Facebook and Google Maps */
+.social-media-maps-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: start; /* Aligns items at the top */
+  gap: 20px; /* Adds space between the containers */
+}
+
+/* Individual Containers */
+.facebook-container, .google-maps-container {
+  flex: 1; /* Each container takes up half the width */
+  max-width: calc(50% - 10px); /* Adjusts for the gap */
+}
+
+
 /* Mobile Styles */
 @media only screen and (max-width: 768px) {
-  .home-container,
-  .map-container,
-  .content-wrapper {
+  /* Adjusts the Home Container for mobile */
+  .home-container {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+  }
+
+  /* Adjusts the Image Section for mobile */
+  .image-section {
+      flex-direction: column;
+      margin-bottom: 20px;
+  }
+
+  /* Adjusts Highlights Section font size for mobile */
+  .highlights h2 {
+      font-size: 1.5em; /* Smaller font size for headings */
+  }
+
+  /* Selected Vendor Section - Ensure this class is used in your HTML/JSX */
+  .selected-vendor {
+      margin-top: 20px; /* Adds space above the selected vendor section */
+      padding: 10px;
+  }
+
+  /* Adds space below the Upcoming Events section */
+  .upcoming-events {
+      margin-bottom: 30px;
+  }
+
+  /* Adjusts Google Maps and Facebook Embed for mobile */
+  .map-container {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      margin-top: 20px; /* Adds space above the Google Maps section */
+      margin-bottom: 20px;
   }
 
   .map-container .GoogleMap,
@@ -264,16 +324,56 @@ body {
       margin: 10px 0; /* Vertical margin only */
   }
 
-  .highlights h2 {
-      font-size: 1.5em; /* Smaller font size for mobile */
+  /* Adds additional spacing between Google Maps and Facebook Embed */
+  .map-container .GoogleMap {
+      margin-bottom: 20px; /* Additional bottom margin */
+      margin-bottom: 20px;
   }
 
+  /* Adjusts Event details font size for better readability */
   .event-date, .event-time, .event-location, .event-description {
-      font-size: 1em; /* Adjust text size for mobile */
+      font-size: 1em;
   }
 
+  /* Ensures modal content is appropriately sized on mobile */
   .modal-content {
       max-width: 90%;
       max-height: 90%;
   }
+
+  /* Button adjustments for mobile */
+  .btn {
+      padding: 8px 16px;
+      margin-top: 15px;
+  }
+
+  /* Content Wrapper adjustments for mobile */
+  .content-wrapper {
+      flex-direction: column;
+  }
+
+  /* Vendor List and Item adjustments for mobile */
+  .vendor-list, .vendor-item {
+      width: 100%; /* Full width for better layout */
+  }
+
+  /* Vendor Image adjustments for mobile */
+  .vendor-image-container img {
+      max-width: 100px; /* Adjust the size of images */
+  }
+
+  .facebook-container {
+    margin: 10px;
+    padding: 10px;
+    max-width: 100%; /* Full width on smaller screens */
 }
+
+.social-media-maps-container {
+  flex-direction: column;
+}
+
+.facebook-container, .google-maps-container {
+  max-width: 100%; /* Full width on smaller screens */
+}
+}
+

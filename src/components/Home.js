@@ -14,7 +14,7 @@ import img from "../img/fleabro-4.gif";
 import GoogleMap from "./GoogleMap";
 import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";
-import './css/Events.css';
+import "./css/Events.css";
 
 const Home = () => {
   const [events, setEvents] = useState([]);
@@ -25,6 +25,13 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState(""); // State for the search query
   const [filteredVendors, setFilteredVendors] = useState([]); // State for filtered vendor list
   const [selectedFeaturedVendor, setSelectedFeaturedVendor] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
+
+  const openModal = (imageUrl) => {
+    setModalImage(imageUrl);
+    setModalOpen(true);
+  };
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768); // Look, CSS is being annoying. Don't judge me!
 
@@ -241,10 +248,14 @@ const Home = () => {
 
       <br />
       {/* Location */}
+      <div className="social-media-maps-container">
+        <div className="map-container">
+          <GoogleMap />
+        </div>
 
-      <div className="map-container">
-        <GoogleMap />
-        <FacebookPageEmbed />
+        <div className="facebook-container">
+          <FacebookPageEmbed />
+        </div>
       </div>
 
       {/* Admin Interface to Select Featured Vendors */}
@@ -296,7 +307,7 @@ const Home = () => {
       )}
 
       {/* Featured Vendors Section */}
-      <section className="featured-vendors">
+      {/*       <section className="featured-vendors">
         <h2>Featured Vendors</h2>
         {featuredVendors.length === 0 ? (
           <p>No featured vendors at the moment.</p>
@@ -308,7 +319,6 @@ const Home = () => {
                 {vendor.avatar && <p>{vendor.avatar}</p>}
                 {vendor.images && (
                   <div>
-                    <p>Image:</p>
                     <img
                       src={vendor.images}
                       alt={`${vendor.name || "Vendor"} representation`}
@@ -318,12 +328,54 @@ const Home = () => {
                 )}
                 <p>{vendor.productCategories}</p>
                 <p>{vendor.description}</p>
-                {/* Add more vendor details here */}
               </li>
             ))}
           </ul>
         )}
-      </section>
+      </section> */}
+
+      <>
+        <section className="featured-vendors-container">
+          <h2 className="featured-vendors-title">Featured Vendors</h2>
+          {featuredVendors.length === 0 ? (
+            <p>No featured vendors at the moment.</p>
+          ) : (
+            <ul className="vendor-list">
+              {featuredVendors.map((vendor) => (
+                <li key={vendor.id} className="vendor-item">
+                  <strong>{vendor.name}</strong>
+                  {vendor.avatar && <p>{vendor.avatar}</p>}
+                  {vendor.images && (
+                    <div className="vendor-image-container">
+                      <img
+                        src={vendor.images}
+                        alt={`${vendor.name || "Vendor"} representation`}
+                        onClick={() => openModal(vendor.images)}
+                        className="vendor-image"
+                      />
+                    </div>
+                  )}
+                  <p>{vendor.productCategories}</p>
+                  <p>{vendor.description}</p>
+                  {/* Add more vendor details here */}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+        {modalOpen && (
+          <div className="modal">
+            <span className="close-modal" onClick={() => setModalOpen(false)}>
+              &times;
+            </span>
+            <img
+              src={modalImage}
+              alt="Expanded view"
+              className="modal-content"
+            />
+          </div>
+        )}
+      </>
 
       {/* Our Vendors Section */}
       {/*       <section className="our-vendors">

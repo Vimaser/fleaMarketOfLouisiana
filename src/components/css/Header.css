@@ -148,9 +148,9 @@
         left: 0;
         right: 0;
         background-color: rgba(33, 37, 41, 0.8); /* Same as header background */
-        display: none;
-        flex-direction: column; /* Stack items vertically */
-        align-items: start; /* Align items to the start */
+        display: none; /* Hidden initially */
+        flex-wrap: wrap; /* Allows items to wrap into a new line */
+        justify-content: center; /* Center align items */
         padding: 10px; /* Add some padding */
         transition: transform 0.3s ease, opacity 0.3s ease;
         transform: translateY(-100%); /* Start off-screen */
@@ -164,7 +164,16 @@
     }
 
     .header-container .pure-menu-item {
-        margin-right: 0; /* Remove margin between items */
+        width: 50%; /* Each item takes up half the width */
+        margin-right: 0; /* Remove right margin */
         margin-bottom: 10px; /* Space between items */
+        text-align: center; /* Center-align the text and buttons */
+    }
+
+    .nav-button {
+        padding: 8px 15px; /* Smaller padding for mobile */
+        font-size: 14px; /* Smaller font size for mobile */
+        margin: 5px auto; /* Center buttons within the menu items */
+        display: block; /* Makes the button fill the width of the menu item */
     }
 }
