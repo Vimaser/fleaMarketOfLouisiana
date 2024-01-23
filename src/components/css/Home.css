@@ -1,116 +1,95 @@
 /* Regular Desktop Styles */
 body {
-    background-color: #FFBA24;
-  }
+  background-color: #FFBA24;
+}
 
-  /* Add this CSS to your existing styles */
+/* Map Container */
 .map-container {
-    display: flex;
-    justify-content: space-between; /* Adjust as needed */
-    align-items: center; /* Center align the elements */
-    
-  }
-  
-  /* If you want to control the width of each element individually, you can use CSS classes */
-  .map-container .GoogleMap {
-    flex: 1; /* This will make the GoogleMap take up 50% of the width */
-    margin-right: 10px; /* Adjust the margin as needed for spacing */
-  }
-  
-  .map-container .FacebookPageEmbed {
-    flex: 1; /* This will make the FacebookPageEmbed take up 50% of the width */
-    margin-left: 20px; /* Adjust the margin as needed for spacing */
-  }
-  
-/*   -webkit-text-stroke: 1px blue;
-    text-shadow:
-      1px 1px 0 blue, 
-      -1px -1px 0 blue,
-      -1px 1px 0 blue, 
-      1px -1px 0 blue;  */
-  .home-container {
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif; 
-    color: blue; /* Inner color */
-   
-    padding: 20px;
-    background-color: #FFBA24;
-
-    letter-spacing: 0.05em; /* Adds spacing between letters */
-    line-height: 1.5; /* Increases space between lines */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px; /* Add spacing below the map container */
 }
 
-  
-  .image-section {
-    display: flex;
-    justify-content: center; /* Horizontal centering */
-    align-items: center; /* Vertical centering */
-    margin-bottom: 40px; /* Add spacing below the section */
-  }
-  
-  .image-section img {
-    max-width: 100%; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
-  }
-  
-  .highlights {
-    padding: 20px 0;
-    text-align: center; /* Centers text and content within the section */
-    color: blue; /* Text color set to blue */
-  }
-  
-  .highlights h2 {
-    margin-bottom: 10px;
-    color: blue; /* Inner color */
-    font-family: "Gill Sans", 
-    "Gill Sans MT", 
-    Calibri, sans-serif; 
-    font-size: 24px; 
-    font-style: normal; 
-    font-variant: normal; 
-    font-weight: 700; 
-    line-height: 26.4px;
-    font-size: 4.0em;
-    word-spacing: 10px;
-      letter-spacing: 2px;
-  }
-  
-  .highlights p, .highlights li {
-    padding: 5px;
-    font-family: 'Merriweather', serif;
-    font-size: 1.0em;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Subtle shadow for smaller text */
-    border-bottom: 1px solid #000; /* Adds a solid line under each paragraph and list item */
-    margin-bottom: 10px; /* Adds some space below each paragraph and list item */
+.map-container .GoogleMap,
+.map-container .FacebookPageEmbed {
+  flex: 1; /* Allocate equal space */
+  margin: 10px; /* Spacing around each map and embed */
 }
 
-  
-  .highlights ul {
-    list-style-type: none; /* Removes bullet points */
-    padding: 0;
-    margin: 0 auto; /* Centers the list */
-    display: inline-block; /* Aligns the list items horizontally */
-  }
-  
-  .highlights li {
-    margin-bottom: 10px; /* Spacing between list items */
-  }
-  
-/* EVENT STYLING */
+/* Home Container */
+.home-container {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  color: blue;
+  padding: 20px;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+}
 
+/* Image Section */
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Highlights Section */
+.highlights {
+  padding: 20px 0;
+  text-align: center;
+  color: blue;
+}
+
+.highlights h2 {
+  margin-bottom: 10px;
+  color: blue;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+  font-size: 2.5em; /* Adjusted for better readability */
+  word-spacing: 10px;
+  letter-spacing: 2px;
+}
+
+.highlights p, .highlights li {
+  padding: 5px;
+  font-family: 'Merriweather', serif;
+  font-size: 1.0em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+}
+
+.highlights ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.highlights li {
+  margin-bottom: 10px;
+}
+
+/* Events Styling */
 .events-container, .upcoming-events {
-  background-color: #fff; /* White background for contrast */
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .events-container {
-  background-color: #FFBA24; /* Specific background for .events-container */
+  background-color: #FFBA24;
 }
 
 .upcoming-events h2, .event-title {
-  color: #333; /* Dark gray color for headings */
+  color: #333;
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
@@ -118,7 +97,7 @@ body {
 }
 
 .event-item {
-  background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 4px;
   padding: 15px;
   margin-bottom: 20px;
@@ -131,14 +110,14 @@ body {
 }
 
 .event-date, .event-time, .event-location, .event-description {
-  color: #333333; /* Dark gray for text */
+  color: #333333;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
-  font-size: 0.6em;
-  display: block; /* Each detail on a new line */
+  font-size: 0.8em; /* Slightly larger for readability */
+  display: block;
 }
 
 .event-description {
-  color: #333333; /* Keeping description same as other text */
+  color: #333333;
   margin: 10px 0;
 }
 
@@ -146,20 +125,21 @@ body {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  max-width: 100px; /* Adjust as needed */
+  max-width: 100px;
   margin-top: 10px;
 }
 
 .event-link {
-  background-color: #007bff; /* A harmonious blue */
+  background-color: #007bff;
   color: white;
   padding: 8px 16px;
   border-radius: 4px;
   text-decoration: none;
+  display: inline-block; /* Ensure proper spacing and alignment */
 }
 
 .event-link:hover {
-  background-color: #0056b3; /* Darker shade of blue for hover state */
+  background-color: #0056b3;
 }
 
 /* Additional styling for admin-vendor-selection, featured-vendors as needed */
@@ -167,95 +147,133 @@ body {
   padding: 20px 0;
 }
 
+/* Button Styles */
+.btn {
+  padding: 10px 20px;
+  margin-top: 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block; /* Ensure buttons are properly aligned */
+}
 
-  
-  /* Button styles retained from your existing CSS */
-  .btn {
-    padding: 10px 20px;
-    margin-top: 20px;
-    text-decoration: none;
-    border-radius: 5px;
-  }
-  
-  .btn-primary {
-    /* background-color: #007bff; */
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    color: white;
-  }
+.btn-primary {
+  background-color: #28a745;
+  color: white;
+}
 
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Content Wrapper */
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px; /* Add spacing below the section */
+}
+
+.highlights, .events {
+  flex: 1;
+  margin: 10px; /* Spacing around each section */
+}
+
+/* Vendor List */
+.vendor-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.vendor-item {
+  margin-bottom: 20px;
+}
+
+.vendor-image-container img {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.vendor-image-container img:hover {
+  transform: scale(1.05);
+}
+
+/* Featured Vendors Container */
+.featured-vendors-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+/* Vendor Image Container */
+.vendor-image-container {
+  display: grid;
+  place-items: center;
+}
+
+.vendor-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modal Styles */
+.modal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  max-height: 80%;
+  max-width: 80%;
+  margin: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+  .home-container,
+  .map-container,
   .content-wrapper {
-    display: flex;
-    justify-content: space-between;
-  }
-  .highlights, .events {
-    flex: 1; /* Adjust as needed, ensures equal width */
-    /* Add any necessary padding or margins */
-  }
-  
-  /* Mobile Styles */
-  @media only screen and (max-width: 768px) {
-    .home-container {
-      padding: 10px;
-      display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-  
-    .hero-section {
-      padding: 30px 0;
-    }
-  
-    .about-section, .services-section, .testimonials-section, .cta-section {
-      padding: 20px 0;
-    }
-  
-    .service-item {
-      padding: 10px;
-      margin: 10px 0;
-    }
-  
-    .btn {
-      padding: 8px 16px;
-      margin-top: 15px;
-    }
-    
-    .map-container {
-        flex-direction: column; /* Stack the elements on top of each other on mobile screens */
-        align-items: center; /* Center align the elements vertically on mobile screens */
-        justify-content: center; /* Center align the elements horizontally on mobile screens */
-    }
-
-    .highlights h2 span::after {
-      content: '\A';
-      white-space: pre;
-    }
-
-    .highlights h2 {
-      margin-bottom: 10px;
-      color: blue; /* Inner color */
-      font-family: "Gill Sans", 
-      "Gill Sans MT", 
-      Calibri, sans-serif; 
-      font-size: 32px; 
-      font-style: normal; 
-      font-variant: normal; 
-      font-weight: 700; 
-      line-height: 26.4px;
-      font-size: 4.0em;
-      word-spacing: 10px;
-      letter-spacing: 2px;
-    }
-
-    .content-wrapper {
-      flex-direction: column;
-    }
+      justify-content: center;
   }
-  
+
+  .map-container .GoogleMap,
+  .map-container .FacebookPageEmbed {
+      width: 100%; /* Full width on mobile screens */
+      margin: 10px 0; /* Vertical margin only */
+  }
+
+  .highlights h2 {
+      font-size: 1.5em; /* Smaller font size for mobile */
+  }
+
+  .event-date, .event-time, .event-location, .event-description {
+      font-size: 1em; /* Adjust text size for mobile */
+  }
+
+  .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+  }
+}
