@@ -1,7 +1,5 @@
-/* Contact.css */
-
 /* Overall Container */
-.contact-container div {
+.contact-container {
     font-family: Arial, sans-serif; 
     margin: 0 auto;
     max-width: 600px; 
@@ -37,7 +35,8 @@
 }
 
 /* Input and Textarea Styling */
-input, textarea {
+.contact-container input, 
+.contact-container textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -48,12 +47,18 @@ input, textarea {
     transition: border-color 0.2s ease-in-out;
 }
 
-input:focus, textarea:focus {
+.contact-container input:focus, 
+.contact-container textarea:focus {
     border-color: #007bff;
 }
 
+/* ReCAPTCHA Styling */
+.contact-container .g-recaptcha {
+    margin-bottom: 20px;
+}
+
 /* Button Styling */
-button {
+.contact-container button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -63,6 +68,12 @@ button {
     transition: background-color 0.2s ease-in-out;
 }
 
-button:hover {
+.contact-container button:hover {
     background-color: #0056b3;
+}
+
+/* Disabled Button Styling */
+.contact-container button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
 }

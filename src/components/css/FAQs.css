@@ -1,0 +1,75 @@
+.faqs-container {
+    background-color: seashell;
+    font-family: "Gill Sans", 
+    "Gill Sans MT", 
+    Calibri, sans-serif; 
+    padding: 20px; /* Padding around the container */
+    margin-top: 20px; /* Space above the container */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 800px; /* Maximum width of the container */
+    margin-left: auto; /* Centering the container */
+    margin-right: auto;
+}
+
+.faqs-container h2 {
+    color: #3800f0; /* Color for the main heading */
+    text-align: center; /* Center align the heading */
+    margin-bottom: 30px; /* Space below the heading */
+}
+
+.faqs-container .create-link {
+    display: block; /* Make the link take up the whole line */
+    background-color: rgba(70, 122, 255, 0.8); /* Link background color */
+    color: white; /* Text color */
+    text-decoration: none; /* No underline */
+    padding: 10px 15px; /* Padding inside the link */
+    text-align: center; /* Center the text */
+    border-radius: 4px; /* Rounded corners for the link */
+    margin-bottom: 20px; /* Space below the link */
+    width: 150px; /* Width of the link */
+    margin-left: auto; /* Centering the link */
+    margin-right: auto;
+}
+
+.faqs-container .faq {
+    margin-bottom: 20px; /* Space between each FAQ */
+}
+
+.faqs-container .faq h3 {
+    color: #000000; /* Color for question headings */
+    margin-bottom: 10px; /* Space below the question */
+}
+
+.faqs-container .faq p {
+    color: #313131; /* Color for the answers */
+    line-height: 1.5; /* Line height for better readability */
+}
+
+.faqs-container .faq img {
+    max-width: 100%; /* Ensure the image is not larger than its container */
+    height: auto; /* Maintain aspect ratio */
+    margin-top: 10px; /* Space above the image */
+}
+
+.faqs-container .faq button {
+    background-color: #f44336; /* Button background color */
+    color: white; /* Text color */
+    border: none; /* No border */
+    padding: 8px 15px; /* Padding inside the button */
+    border-radius: 4px; /* Rounded corners for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin-top: 10px; /* Space above the button */
+}
+
+.faqs-container .faq button:hover {
+    background-color: #d32f2f; /* Darker shade on hover */
+}
+
+.faqs-container .faq hr {
+    margin-top: 20px; /* Space above the horizontal line */
+    border: 0; /* Remove default border */
+    height: 1px; /* Height of the line */
+    background-color: #ddd; /* Color of the line */
+    margin-bottom: 20px; /* Space below the line */
+}

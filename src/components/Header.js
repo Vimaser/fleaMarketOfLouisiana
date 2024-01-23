@@ -100,23 +100,27 @@ const Header = () => {
         </div>
         <div className="times">
           {/* If the times are not meant to be a link, use a button */}
-         
         </div>
-        <div className="social-media-links"> <p className="time">
-            Sat. 9am - 5pm | Sun. 9am - 5pm
-          </p><p1>   </p1>
+        <div className="social-media-links">
+          {" "}
+          <p className="time">Sat. 9am - 5pm | Sun. 9am - 5pm</p>
+          <p1> </p1>
           <a href="https://www.facebook.com/FLEALA/">
             <FaFacebookSquare />
-          </a><p1>  &#160;  </p1>
+          </a>
+          <p1> &#160; </p1>
           <a href="your_twitter_link">
             <FaTwitterSquare />
-          </a><p1>  &#160;  </p1>
+          </a>
+          <p1> &#160; </p1>
           <a href="your_youtube_link">
             <FaYoutubeSquare />
-          </a><p1>  &#160;  </p1>
+          </a>
+          <p1> &#160; </p1>
           <a href="mailto:fleamarket@eatel.net">
             <FaEnvelope />
-          </a><p1>  &#160;  </p1>
+          </a>
+          <p1> &#160; </p1>
         </div>
       </div>
 
@@ -195,6 +199,18 @@ const Header = () => {
               Search
             </NavLink>
           </li>
+          <li className="pure-menu-item">
+            <NavLink
+              to="/Gallery"
+              className={`pure-menu-link nav-button ${
+                location.pathname === "/Gallery" ? "active-link" : ""
+              }`}
+              onClick={closeMobileMenu}
+            >
+              Gallery
+            </NavLink>
+          </li>
+
           {user ? (
             <li className="pure-menu-item">
               <NavLink
@@ -275,15 +291,15 @@ const Header = () => {
             </li>
           ) : (
             <li className="pure-menu-item">
-              <NavLink
-                to="/login"
+              {/*               <NavLink
+                to="/VendorLogin"
                 className={`pure-menu-link nav-button ${
-                  location.pathname === "/login" ? "active-link" : ""
+                  location.pathname === "/VendorLogin" ? "active-link" : ""
                 }`}
                 onClick={closeMobileMenu}
               >
                 Login
-              </NavLink>
+              </NavLink> */}
             </li>
           )}
         </ul>

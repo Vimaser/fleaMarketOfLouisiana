@@ -36,6 +36,7 @@ import {
   Search,
   VendorPage,
   FacebookPageEmbed,
+  Gallery,
   Header,
 } from "./components";
 import "./App.css";
@@ -86,6 +87,7 @@ function App() {
             <Route path="/vendorpage/:vendorID" element={<VendorPage />} />
             <Route path="/adminportal" element={<AdminPortal />} />
             <Route path="/createservices" element={<CreateServices />} />
+            <Route path="/Gallery" element={<Gallery />} />
             <Route path="/fleamarketmap" element={<FleaMarketMap />} />
             <Route path="/facebookpageembed" element={<FacebookPageEmbed />} />
           </Routes>

@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../firebaseConfig";
-// import "./css/FAQs.css";
+import "./css/FAQs.css";
 
 const FAQs = () => {
   const [faqs, setFAQs] = useState([]);

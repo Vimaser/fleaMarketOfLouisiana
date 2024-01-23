@@ -34,4 +34,5 @@ export { default as Map } from "./Map";
 export { default as GoogleMap } from "./GoogleMap";
 export { default as Search } from "./Search";
 export { default as VendorPage } from "./VendorPage";
+export { default as Gallery } from "./Gallery";
 export { default as FacebookPageEmbed } from "./FacebookPageEmbed";

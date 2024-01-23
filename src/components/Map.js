@@ -1,6 +1,7 @@
 import React from "react";
 // import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import FleaMarketLayoutImage from "../img/map.png";
+import "./css/Map.css";
 
 // Dev notes. API not implemented due to cost facter. Still viable if customer changes their mind.
 
@@ -18,7 +19,7 @@ const Map = () => {
   return (
     <>
       <div className="map-container">
-        <h2>Flea Market Layout</h2>
+        {/* <h2>Flea Market Layout</h2> */}
         <img
           src={FleaMarketLayoutImage}
           alt="Flea Market Layout"
