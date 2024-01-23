@@ -263,7 +263,7 @@ body {
 .social-media-maps-container {
   display: flex;
   justify-content: space-between;
-  align-items: start; /* Aligns items at the top */
+  align-items: flex-start; /* Aligns items at the top */
   gap: 20px; /* Adds space between the containers */
 }
 
