@@ -102,36 +102,35 @@ const Header = () => {
           {/* If the times are not meant to be a link, use a button */}
         </div>
         <div className="social-media-links">
-          {" "}
           <p className="time">Sat. 9am - 5pm | Sun. 9am - 5pm</p>
-          <p1> </p1>
           <a href="https://www.facebook.com/FLEALA/">
             <FaFacebookSquare />
           </a>
-          <p1> &#160; </p1>
           <a href="your_twitter_link">
             <FaTwitterSquare />
           </a>
-          <p1> &#160; </p1>
           <a href="your_youtube_link">
             <FaYoutubeSquare />
           </a>
-          <p1> &#160; </p1>
           <a href="mailto:fleamarket@eatel.net">
             <FaEnvelope />
           </a>
-          <p1> &#160; </p1>
         </div>
       </div>
 
       {/* Navigation Menu */}
       <nav className={`nav-bar ${mobileMenuOpen ? "open" : ""}`}>
+        {/* "Press Here" Label for Hamburger Menu */}
+        <div className="hamburger-label">PRESS HERE!</div>
+
         {/* Hamburger Menu for Mobile */}
         <div className="hamburger" onClick={toggleMobileMenu}>
           <span></span>
           <span></span>
           <span></span>
         </div>
+
+        {/* Menu List */}
         <ul className={`pure-menu-list ${mobileMenuOpen ? "active" : ""}`}>
           <li className="pure-menu-item">
             <NavLink
@@ -210,7 +209,6 @@ const Header = () => {
               Gallery
             </NavLink>
           </li>
-
           {user ? (
             <li className="pure-menu-item">
               <NavLink
@@ -290,17 +288,7 @@ const Header = () => {
               </NavLink>
             </li>
           ) : (
-            <li className="pure-menu-item">
-              {/*               <NavLink
-                to="/VendorLogin"
-                className={`pure-menu-link nav-button ${
-                  location.pathname === "/VendorLogin" ? "active-link" : ""
-                }`}
-                onClick={closeMobileMenu}
-              >
-                Login
-              </NavLink> */}
-            </li>
+            <li className="pure-menu-item"></li>
           )}
         </ul>
       </nav>

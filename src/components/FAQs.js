@@ -18,10 +18,12 @@ const FAQs = () => {
   const [loading, setLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
+
+  // changed it from a gif of Stan to something less copywrite infringing...
   const specialString =
     "Collectibles, clothing, FRC (fire-resistant clothing), tools, video games, comic books, antiques, swords/knives, leather goods, home decor, terracotta pots, plants, sporting memorabilia, furniture, ceramic tile and so much more!!";
   const specialGifUrl =
-    "https://64.media.tumblr.com/2fb288b135f406ed4571ba639b5bcb4c/tumblr_ntvqrlzaRa1u53g1mo2_400.gifv";
+    "https://thefleamarketoflouisiana.com/static/media/logo.50e2953ea98ea6ce15bb.png";
 
   console.log("Netlify's ESlint is a pain in the butt", isLoggedIn);
 

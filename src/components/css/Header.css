@@ -133,13 +133,37 @@
     opacity: 0;
 }
 
-@media (max-width: 768px) {
-    .top-header {
-        display: none;
-    }
+.hamburger-label {
+    color: white; /* White text color */
+    text-align: center; /* Center the text */
+    font-size: 1rem; /* Adjust font size as needed */
+    margin-bottom: 5px; /* Space between label and hamburger icon */
+    display: none; /* Hidden by default */
+}
 
+@media (max-width: 768px) {
     .hamburger {
         display: flex;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        height: 40px; /* Height of the hamburger icon */
+    }
+    
+    .hamburger span {
+        display: block;
+        width: 30px; /* Width of each line */
+        height: 2px; /* Height of each line */
+        background-color: white; /* Color of the lines */
+        margin: 6px 0; /* Space between the lines */
+    }
+
+    .hamburger-label {
+        display: block; /* Show the label on small screens */
+    }
+    
+    .top-header {
+        display: none;
     }
 
     .header-container .pure-menu-list {
