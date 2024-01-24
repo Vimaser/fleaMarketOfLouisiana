@@ -16,26 +16,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .pure-menu-link {
-    padding: 1em .7em;
+    padding: 1em 0.7em;
 }
 
-.photo-box, .text-box {
-    overflow: hidden;
+/* Gallery container */
+.gallery-container {
+    padding: 2em;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid items */
+    gap: 20px; /* Space between grid items */
+}
+
+/* Individual photo box */
+.photo-box {
     position: relative;
-    height: 250px;
-    text-align: center;
-}
-
-.photo-box-thin {
-    height: 120px;
+    cursor: pointer; /* Change cursor on hover */
 }
 
 .photo-box img {
     max-width: 100%;
     height: auto;
-    min-height: 250px;
+    border-radius: 4px;
+    object-fit: cover; /* Cover the container, might crop the image */
 }
 
+/* Title and delete button */
 .photo-box aside {
     position: absolute;
     bottom: 0;
@@ -48,58 +58,7 @@ h1, h2, h3, h4, h5, h6 {
     background: linear-gradient(to bottom, rgba(16,27,30,0) 0%,rgba(12,2,2,1) 90%);
 }
 
-.photo-box aside span {
-    color: #aaa;
-}
-
-.photo-box aside span a {
-    color: #ccc;
-    text-decoration: none;
-}
-
-.text-box {
-    background: rgb(49, 49, 49); /* bluish grey */
-    color: rgb(255, 190, 94); /* steel blue */
-}
-
-.text-box-head {
-    color: #fff;
-    padding-bottom: 0.2em;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 24px;
-}
-
-.text-box-subhead {
-    font-weight: normal;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.form-box {
-    text-align: center;
-    font-size: 120%;
-    border-bottom: 1px solid #eee;
-}
-
-.form-box .pure-button {
-    background-color: #61B842;
-    color: white;
-    vertical-align: top;
-    font-size: 85%;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 4px;
-    margin: 0.3em;
-}
-
-.pure-form input[type] {
-    margin: 0.3em auto;
-    text-align: center;
-}
-
+/* Footer styles */
 .footer {
     background: #111;
     color: #666;
@@ -108,28 +67,38 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 80%;
 }
 
+/* Modal styles for full-size image view */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.image-modal img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+
 @media (min-width: 30em) {
+    /* Larger screen adjustments */
     .photo-box, .text-box {
         text-align: left;
     }
-
-    .photo-box-thin {
-        height: 250px;
-    }
-}
-
-/* Additional styles for Gallery.js */
-.gallery-container {
-    padding: 2em;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    max-width: 800px;
-}
-
-.gallery-header {
-    color: #111;
-    text-align: center;
-    margin-bottom: 20px;
 }

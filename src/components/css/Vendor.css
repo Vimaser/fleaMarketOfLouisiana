@@ -1,71 +1,108 @@
 .vendor-container {
-    background-color: #FFBA24;
-    color: blue;
-    font-family: 'Roboto', sans-serif;
-    padding: 20px;
+  background-color: #f0f2f5; /* Facebook-like background color... gross */
+  color: #1c1e21;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vendor-header {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.vendor-name {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.vendor-avatar {
+  font-style: italic;
+  color: #555;
+}
+
+.vendor-info p, .vendor-actions button, .vendor-edit-form label {
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+.vendor-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+.vendor-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-button, .update-button, .cancel-button {
+  background-color: #1877f2; /* Facebook blue... Eww... */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+.edit-button:hover, .update-button:hover, .cancel-button:hover {
+  background-color: #1654a1;
+}
+
+.vendor-edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.vendor-edit-form label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.vendor-edit-form input, .vendor-edit-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .vendor-container {
+    padding: 15px;
   }
-  
-  .vendor-container h2 {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 20px;
+
+  .vendor-name {
+    font-size: 1.8rem;
   }
-  
-  .vendor-container p, .vendor-container label {
-    margin-bottom: 10px;
-    line-height: 1.6;
+
+  .vendor-info p, .vendor-actions button, .vendor-edit-form label {
+    font-size: 1rem;
   }
-  
-  .vendor-container img {
-    display: block;
-    margin: 0 auto 20px;
-    max-width: 100%;
-    height: auto;
+}
+
+@media (max-width: 480px) {
+  .vendor-container {
+    padding: 10px;
   }
-  
-  .vendor-container button {
-    background-color: blue;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    display: block;
-    width: 100%;
+
+  .vendor-name {
+    font-size: 1.5rem;
   }
-  
-  .vendor-container button:hover {
-    background-color: darkblue;
+
+  .vendor-info p, .vendor-actions button, .vendor-edit-form label {
+    font-size: 0.9rem;
   }
-  
-  .vendor-container input, .vendor-container textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .vendor-container h2 {
-      font-size: 1.5rem;
-    }
-  
-    .vendor-container p, .vendor-container label {
-      font-size: 1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .vendor-container h2 {
-      font-size: 1.3rem;
-    }
-  
-    .vendor-container p, .vendor-container label {
-      font-size: 0.9rem;
-    }
-  }
-  
+}
+

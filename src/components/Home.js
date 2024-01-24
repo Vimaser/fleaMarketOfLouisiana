@@ -12,6 +12,7 @@ import "../firebaseConfig";
 import useUserRole from "./useUserRole";
 import img from "../img/fleabro-4.gif";
 import GoogleMap from "./GoogleMap";
+import Gallery from "./Gallery";
 import FacebookPageEmbed from "./FacebookPageEmbed";
 import "./css/Home.css";
 import "./css/Events.css";
@@ -376,6 +377,10 @@ const Home = () => {
           </div>
         )}
       </>
+
+      <div className="gallery-container">
+          <Gallery />
+        </div>
 
       {/* Our Vendors Section */}
       {/*       <section className="our-vendors">

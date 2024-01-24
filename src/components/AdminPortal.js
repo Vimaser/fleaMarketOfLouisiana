@@ -6,9 +6,11 @@ import {
   getDocs,
   getDoc,
   deleteDoc,
+  updateDoc,
   doc,
 } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import "./css/AdminPortal.css";
 
 const AdminPortal = () => {
   const [vendors, setVendors] = useState([]);
@@ -16,6 +18,36 @@ const AdminPortal = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [userRole, setUserRole] = useState(null);
+  const [currentPassphrase, setCurrentPassphrase] = useState("");
+  const [newPassphrase, setNewPassphrase] = useState("");
+
+  useEffect(() => {
+    const fetchPassphrase = async () => {
+      const db = getFirestore();
+      const docRef = doc(db, "settings", "Ihn3alqYKbej8hayeRfW");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setCurrentPassphrase(docSnap.data().passphrase);
+      } else {
+        console.log("No passphrase found!");
+      }
+    };
+
+    fetchPassphrase();
+  }, []);
+
+  const handleUpdatePassphrase = async () => {
+    const db = getFirestore();
+    const passphraseRef = doc(db, "settings", "Ihn3alqYKbej8hayeRfW");
+
+    await updateDoc(passphraseRef, {
+      passphrase: newPassphrase,
+    });
+
+    setCurrentPassphrase(newPassphrase);
+    setNewPassphrase("");
+  };
 
   useEffect(() => {
     // Function to fetch vendors from Firestore
@@ -82,23 +114,48 @@ const AdminPortal = () => {
   }
 
   return (
-    <div>
+    <div className="admin-portal-container">
+      <div className="passphrase-section">
+        <p className="current-passphrase">
+          Current Passphrase: {currentPassphrase}
+        </p>
+        <input
+          type="text"
+          className="new-passphrase-input"
+          value={newPassphrase}
+          onChange={(e) => setNewPassphrase(e.target.value)}
+        />
+        <button
+          className="update-passphrase-button"
+          onClick={handleUpdatePassphrase}
+        >
+          Update Passphrase
+        </button>
+      </div>
       <input
         type="text"
+        className="admin-search-input"
         placeholder="Search by Name or Lot Number"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       {loading ? (
-        <p>Loading...</p>
+        <p className="admin-status-message">Loading...</p>
       ) : error ? (
-        <p>Error: {error}</p>
+        <p className="admin-error-message">Error: {error}</p>
       ) : (
-        <ul>
+        <ul className="admin-vendor-list">
           {filteredVendors.map((vendor) => (
-            <li key={vendor.id}>
-              <Link to={`/vendor/${vendor.id}`}>{vendor.name}</Link>
-              <button onClick={() => handleDelete(vendor.id)}>Delete</button>
+            <li key={vendor.id} className="admin-vendor-item">
+              <Link to={`/vendor/${vendor.id}`} className="admin-vendor-link">
+                {vendor.name}
+              </Link>
+              <button
+                className="admin-delete-button"
+                onClick={() => handleDelete(vendor.id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>

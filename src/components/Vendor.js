@@ -291,85 +291,88 @@ const Vendor = () => {
     <div className="vendor-container">
       {vendor && !editMode ? (
         <>
-          <h2>{vendor.name}</h2>
-          <p>External Hosting: {vendor.avatar}</p>
-          <p>{vendor.description}</p>
-          <p>Contact Info: {vendor.contactInformation}</p>
-          <p>Location: {vendor.locationInMarket}</p>
-          <p>Categories: {vendor.productCategories}</p>
-          <p>ID: {vendor.vendorID}</p>
-          <p>
-            Images:
+          <div className="vendor-profile">
+            <h2 className="vendor-name">{vendor.name}</h2>
+            <p className="vendor-avatar">External Hosting: {vendor.avatar}</p>
+            <p className="vendor-description">{vendor.description}</p>
+            <p className="vendor-contact">
+              Contact Info: {vendor.contactInformation}
+            </p>
+            <p className="vendor-location">
+              Location: {vendor.locationInMarket}
+            </p>
+            <p className="vendor-categories">
+              Categories: {vendor.productCategories}
+            </p>
+            <p className="vendor-id">ID: {vendor.vendorID}</p>
             {vendor.images && (
-              <img
-                src={vendor.images}
-                alt={`${vendor.name}'s upload`}
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
+              <div className="vendor-images">
+                <img
+                  src={vendor.images}
+                  alt={`${vendor.name}'s upload`}
+                  className="vendor-image"
+                />
+              </div>
             )}
-          </p>
-          <p>Lot Number: {vendor.lotNum}</p>
+            <p className="vendor-lot-number">Lot Number: {vendor.lotNum}</p>
+          </div>
           {(currentUser && currentUser.uid === vendorID) ||
           userRole === "Admin" ? (
-            <button onClick={() => setEditMode(true)}>Edit</button>
+            <button
+              onClick={() => setEditMode(true)}
+              className="edit-vendor-button"
+            >
+              Edit
+            </button>
           ) : null}
         </>
       ) : (
-        <form onSubmit={updateVendor}>
-          <label>
+        <form onSubmit={updateVendor} className="edit-vendor-form">
+          <label className="vendor-label">
             Name:
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              className="vendor-input"
             />
           </label>
-          <br />
-          <label>
+          <label className="vendor-label">
             Description:
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              className="vendor-textarea"
             />
           </label>
-          <br />
-          <label>
+          <label className="vendor-label">
             Contact Information:
             <input
               type="text"
               value={contactInformation}
               onChange={(e) => setContactInformation(e.target.value)}
+              className="vendor-input"
             />
           </label>
-          <br />
-          <label>
+          <label className="vendor-label">
             Location in Market:
             <input
               type="text"
               value={locationInMarket}
               onChange={(e) => setLocationInMarket(e.target.value)}
+              className="vendor-input"
             />
           </label>
-          <br />
-          <label>
+          <label className="vendor-label">
             Product Categories:
             <input
               type="text"
               value={productCategories}
               onChange={(e) => setProductCategories(e.target.value)}
+              className="vendor-input"
             />
           </label>
-          {/*           <br />
-          <label>
-            External Hosting (URL):
-            <input
-              type="text"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-            />
-          </label>
-          <br /> */}
-
+          {/* Additional form fields and logic for Admin to handle images */}
           {userRole === "Admin" &&
             (vendor.images ? (
               <>
@@ -408,19 +411,27 @@ const Vendor = () => {
                 )}
               </>
             ))}
-          <br />
 
-          <label>
+          <label className="vendor-label">
             Lot Number:
             <input
               type="text"
               value={lotNum}
               onChange={(e) => setLotNum(e.target.value)}
+              className="vendor-input"
             />
           </label>
-          <br />
-          <button type="submit">Update</button>
-          <button onClick={() => setEditMode(false)}>Cancel</button>
+          <div className="vendor-form-actions">
+            <button type="submit" className="vendor-update-button">
+              Update
+            </button>
+            <button
+              onClick={() => setEditMode(false)}
+              className="vendor-cancel-button"
+            >
+              Cancel
+            </button>
+          </div>
         </form>
       )}
     </div>

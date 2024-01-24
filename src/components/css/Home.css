@@ -377,5 +377,30 @@ body {
 .facebook-container, .google-maps-container {
   max-width: 100%; /* Full width on smaller screens */
 }
+  /* Adjustments for the Gallery container in mobile */
+  .gallery-container {
+    padding: 0; /* Removes padding */
+    margin: 0 10px; /* Adds margin to the sides */
+    max-width: calc(100% - 20px); /* Adjusts width to account for margin */
+    overflow-x: hidden; /* Hides horizontal overflow */
+  }
+
+  /* Additional styles specific to mobile */
+  .gallery-container .l-box {
+    padding: 1em; /* Reduces padding for mobile */
+    margin: 0; /* Removes margin */
+  }
+
+  .gallery-container .photo-box {
+    max-width: calc(50% - 10px); /* Half width minus the gap */
+    margin: 5px; /* Adds margin around each photo box */
+  }
+
+  .gallery-container .photo-box img {
+    width: 100%; /* Full width of its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+
 }
 

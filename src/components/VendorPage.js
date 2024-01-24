@@ -32,18 +32,22 @@ const VendorPage = () => {
     <div className="vendor-page-container">
       {vendor && (
         <>
-          <h2>{vendor.name}</h2>
-          <p>{vendor.description}</p>
+          <h2 className="vendor-name">{vendor.name}</h2>
+          <p className="vendor-description">{vendor.description}</p>
 
           {vendor.images && (
             <img
+              className="vendor-image"
               src={vendor.images}
               alt={`Vendor ${vendor.name}`}
-              style={{ maxWidth: "100%", height: "auto" }}
             />
           )}
-          <p>Location in Market: {vendor.locationInMarket}</p>
-          <p>Product Categories: {vendor.productCategories}</p>
+          <p className="vendor-location">
+            Location in Market: {vendor.locationInMarket}
+          </p>
+          <p className="vendor-categories">
+            Product Categories: {vendor.productCategories}
+          </p>
           {/* Additional vendor details can be added here if needed */}
         </>
       )}

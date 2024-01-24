@@ -52,35 +52,45 @@ const Search = () => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search by lot number, products, name, and description"
+        className="search-input"
       />
-      <button onClick={handleSearch} disabled={loading}>
+      <button
+        onClick={handleSearch}
+        disabled={loading}
+        className="search-button"
+      >
         {loading ? "Searching..." : "Search"}
       </button>
 
       {vendors.length > 0 ? (
-        <div>
+        <div className="vendor-results">
           {vendors.map((vendor) => (
             <div key={vendor.id} className="vendor-info">
-              <Link to={`/vendorpage/${vendor.id}`}>
-                <h3>{vendor.name}</h3>
+              <Link to={`/vendorpage/${vendor.id}`} className="vendor-link">
+                <h3 className="vendor-name">{vendor.name}</h3>
+
+                {vendor.images && (
+                  <img
+                    src={vendor.images}
+                    alt={`Vendor ${vendor.name}`}
+                    className="vendor-image"
+                  />
+                )}
+                <p className="vendor-description">
+                  Description: {vendor.description}
+                </p>
+                <p className="vendor-lot-number">Lot Number: {vendor.lotNum}</p>
+                <p className="vendor-categories">
+                  Product Categories: {vendor.productCategories}
+                </p>
               </Link>
-              {vendor.images && (
-                <img
-                  src={vendor.images}
-                  alt={vendor.name} // Updated alt text
-                  className="vendor-image"
-                />
-              )}
-              <p>Description: {vendor.description}</p>
-              <p>Lot Number: {vendor.lotNum}</p>
-              <p>Product Categories: {vendor.productCategories}</p>
             </div>
           ))}
         </div>
       ) : loading ? (
-        <p>Searching...</p>
+        <p className="search-status">Searching...</p>
       ) : (
-        <p>No vendors found.</p>
+        <p className="no-vendors">No vendors found.</p>
       )}
     </div>
   );

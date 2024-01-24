@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import "./css/VendorSignUp.css";
 
 const VendorSignUp = () => {
@@ -13,18 +13,33 @@ const VendorSignUp = () => {
   const [images, setImages] = useState("");
   const [contactInformation, setContactInformation] = useState("");
   const [locationInMarket, setLocationInMarket] = useState("");
-  const [passphrase, setPassphrase] = useState("");
+  const [enteredPassphrase, setEnteredPassphrase] = useState(""); // State for user-entered passphrase
+  const [passphrase, setPassphrase] = useState(""); // State for fetched passphrase
   const [error, setError] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [LotNum, setLotNum] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const correctPassphrase = process.env.REACT_APP_VENDOR_PASSPHRASE;
   const db = getFirestore();
+
+  useEffect(() => {
+    const fetchPassphrase = async () => {
+      const docRef = doc(db, "settings", "Ihn3alqYKbej8hayeRfW");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setPassphrase(docSnap.data().passphrase);
+      } else {
+        console.log("No passphrase found!");
+      }
+    };
+
+    fetchPassphrase();
+  }, [db]);
 
   const handlePassphraseSubmit = (e) => {
     e.preventDefault();
-    if (passphrase === correctPassphrase) {
+    if (enteredPassphrase === passphrase) {
       setIsAuthorized(true);
     } else {
       setError("Incorrect passphrase");
@@ -32,11 +47,10 @@ const VendorSignUp = () => {
   };
 
   const vendorSignUp = (e) => {
-    e.preventDefault(); // Prevent form submission
+    e.preventDefault();
 
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
-        // Sign-up successful, create vendor profile
         const user = userCredential.user;
         const vendorProfile = {
           vendorID: user.uid,
@@ -53,10 +67,8 @@ const VendorSignUp = () => {
         await setDoc(doc(db, "Vendors", user.uid), vendorProfile);
 
         alert("User and vendor profile created successfully");
-        // Redirect or update UI as needed
       })
       .catch((error) => {
-        // Handle errors
         const errorCode = error.code;
         const errorMessage = error.message;
         setError(`Error signing up: ${errorCode} - ${errorMessage}`);
@@ -71,15 +83,15 @@ const VendorSignUp = () => {
           {error}
         </p>
       )}
-
+  
       {!isAuthorized ? (
         <form onSubmit={handlePassphraseSubmit} className="passphrase-form">
           <label>
             Enter Passphrase:
             <input
               type="text"
-              value={passphrase}
-              onChange={(e) => setPassphrase(e.target.value)}
+              value={enteredPassphrase}
+              onChange={(e) => setEnteredPassphrase(e.target.value)}
               required
               className="passphrase-input"
             />
@@ -88,7 +100,6 @@ const VendorSignUp = () => {
             Submit Passphrase
           </button>
         </form>
-
       ) : (
         <form onSubmit={vendorSignUp} className="signup-form">
           <label className="email-label">
@@ -123,7 +134,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-
+  
           <label className="description-label">
             Description:
             <textarea
@@ -134,7 +145,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-
+  
           <label className="product-categories-label">
             Product Categories:
             <input
@@ -146,7 +157,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-
+  
           <div className="avatar-section">
             <label className="avatar-label">Avatar:</label>
             <input
@@ -156,7 +167,7 @@ const VendorSignUp = () => {
               className="avatar-input"
             />
           </div>
-
+  
           <label className="images-label">
             Images (URLs):
             <input
@@ -167,7 +178,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-
+  
           <label className="contact-info-label">
             Contact Information:
             <input
@@ -179,7 +190,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-
+  
           <label className="location-label">
             Location in Market:
             <input
@@ -201,7 +212,7 @@ const VendorSignUp = () => {
               className="lot-number-input"
             />
           </div>
-
+  
           <button type="submit" className="signup-btn">
             Sign Up
           </button>
@@ -209,6 +220,7 @@ const VendorSignUp = () => {
       )}
     </div>
   );
+  
 };
 
 export default VendorSignUp;

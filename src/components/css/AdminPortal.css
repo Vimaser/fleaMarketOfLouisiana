@@ -1,8 +1,43 @@
+/* Styles for passphrase section */
+.passphrase-section {
+    margin-bottom: 20px;
+}
+
+.current-passphrase {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.new-passphrase-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.update-passphrase-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-passphrase-button:hover {
+    background-color: #0056b3;
+}
+
 /* Style for the main container */
 .admin-portal-container {
     padding: 20px;
     max-width: 800px;
     margin: auto;
+    background-color: #fff; /* White background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Style for the search input */
@@ -13,6 +48,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    outline: none; /* Removes focus outline */
 }
 
 /* Style for loading and error messages */
@@ -35,14 +71,17 @@
     margin-bottom: 10px;
     border-radius: 4px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Distributes space between link and button */
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    gap: 15px; /* Adds space between the link and button */
 }
 
 /* Style for vendor links */
 .admin-vendor-link {
     color: #007bff;
     text-decoration: none;
+    font-weight: bold;
 }
 
 /* Style for delete buttons */
@@ -53,8 +92,31 @@
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .admin-delete-button:hover {
     background-color: #ff3333;
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+    .admin-portal-container {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .admin-vendor-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; /* Reduces space in column layout */
+    }
+
+    .admin-delete-button {
+        margin-top: 10px; /* Adds space between the link and button on small screens */
+    }
+
+    .passphrase-section {
+        padding: 10px;
+    }
 }
