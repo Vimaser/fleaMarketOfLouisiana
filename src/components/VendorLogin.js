@@ -1,14 +1,36 @@
 import React, { useState } from "react";
 import { auth } from "../firebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "./css/VendorLogin.css";
 
 const VendorLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [resetEmail, setResetEmail] = useState("");
+  const [showReset, setShowReset] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Hook to navigate
+
+  const toggleResetForm = () => {
+    setShowReset(!showReset);
+  };
+
+  const handlePasswordReset = async () => {
+    const auth = getAuth();
+    try {
+      await sendPasswordResetEmail(auth, resetEmail);
+      alert(
+        "Password reset email sent! Please check your junk or spam folder!"
+      );
+    } catch (error) {
+      console.error("Error sending password reset emaiL:", error);
+    }
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -62,7 +84,25 @@ const VendorLogin = () => {
         <button type="submit" className="login-btn">
           Login
         </button>
-      </form>
+
+      {/* Reset Password Form */}
+      <br />
+
+      <button onClick={toggleResetForm}>
+        {showReset ? "Cancel Reset" : "Reset Password"}
+      </button>
+
+      {showReset && (
+        <div className="reset-password-form">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            value={resetEmail}
+            onChange={(e) => setResetEmail(e.target.value)}
+          />
+          <button onClick={handlePasswordReset}>Send Reset Email</button>
+        </div>
+      )}      </form>
     </div>
   );
 };

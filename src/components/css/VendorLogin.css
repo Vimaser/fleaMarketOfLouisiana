@@ -51,6 +51,20 @@
   .login-btn:hover {
     background-color: darkblue;
   }
+
+  /* Additional styles for reset password form */
+.reset-password-form {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.reset-password-form input[type="email"] {
+  margin-bottom: 10px;
+}
+
+.reset-password-form button {
+  width: 100%;
+}
   
   /* Responsive adjustments for mobile devices */
   @media (max-width: 768px) {
