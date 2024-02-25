@@ -411,6 +411,7 @@ const Vendor = () => {
                 )}
               </>
             ))}
+          <br />
 
           <label className="vendor-label">
             Lot Number:
