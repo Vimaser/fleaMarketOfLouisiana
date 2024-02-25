@@ -13,8 +13,8 @@ const VendorSignUp = () => {
   const [images, setImages] = useState("");
   const [contactInformation, setContactInformation] = useState("");
   const [locationInMarket, setLocationInMarket] = useState("");
-  const [enteredPassphrase, setEnteredPassphrase] = useState(""); // State for user-entered passphrase
-  const [passphrase, setPassphrase] = useState(""); // State for fetched passphrase
+  const [enteredPassphrase, setEnteredPassphrase] = useState("");
+  const [passphrase, setPassphrase] = useState("");
   const [error, setError] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [LotNum, setLotNum] = useState("");

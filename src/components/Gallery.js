@@ -23,7 +23,7 @@ const Gallery = () => {
           result.items.map(async (itemRef) => {
             try {
               const url = await getDownloadURL(itemRef);
-              return { url, title: "" }; // Adjust to include actual title if available
+              return { url, title: "" };
             } catch (error) {
               console.error("Error fetching individual image URL:", error);
               return null;

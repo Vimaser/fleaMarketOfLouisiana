@@ -14,7 +14,7 @@ const VendorLogin = () => {
   const [resetEmail, setResetEmail] = useState("");
   const [showReset, setShowReset] = useState(false);
   const [error, setError] = useState("");
-  const navigate = useNavigate(); // Hook to navigate
+  const navigate = useNavigate();
 
   const toggleResetForm = () => {
     setShowReset(!showReset);
