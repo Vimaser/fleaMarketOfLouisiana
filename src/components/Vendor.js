@@ -373,7 +373,7 @@ const Vendor = () => {
             />
           </label>
           {/* Additional form fields and logic for Admin to handle images */}
-          {userRole === "Admin" || "vendor" &&
+          {(userRole === "Admin" || userRole === "vendor") &&
             (vendor.images ? (
               <>
                 <p>Current Image:</p>
