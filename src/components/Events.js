@@ -30,7 +30,8 @@ const Events = () => {
           <img src={event.image} alt={event.title} />
           <p>{event.description}</p>
           <p>Date: {event.date}</p>
-          <p>Time: {event.time}</p>
+          <p>Starting Time: {event.time}</p>
+          <p>Ending Time: {event.endTime}</p>
           <p>Location: {event.location}</p>
           {event.link && <a href={event.link}>More Info</a>}
           <hr />

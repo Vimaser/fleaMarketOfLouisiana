@@ -12,13 +12,14 @@ const CreateEvents = () => {
   const [image, setImage] = useState('');
   const [link, setLink] = useState('');
   const [loading, setLoading] = useState(false);
+  const [endTime, setEndTime] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     const db = getFirestore();
     const newEvent = {
-      title, description, date, time, location, image, link
+      title, description, date, time, endTime, location, image, link
     };
     try {
       await addDoc(collection(db, 'events'), newEvent);
@@ -75,6 +76,14 @@ const CreateEvents = () => {
             value={time} 
             onChange={e => setTime(e.target.value)}
             required
+          />
+        </div>
+        <div>
+          <label>End Time:</label>
+          <input 
+            type="time"
+            value={endTime}
+            onChange={e => setEndTime(e.target.value)}
           />
         </div>
         <div>

@@ -194,6 +194,15 @@ const Home = () => {
           </ul>
         </section>
 
+        <section className="highlights">
+            <h2>OFFICE HOURS:</h2>
+            <ul>
+              <li>MONDAY: 9:00 AM TO 4:30 PM</li>
+              <li>THURSDAY: 9:00 AM TO 4:30 PM</li>
+              <li>FRIDAY: 9:00 AM TO 4:30 PM</li>
+            </ul>
+        </section>
+
         {/* Upcoming Events Section */}
         <section className="upcoming-events">
           <h2>Upcoming Events</h2>
