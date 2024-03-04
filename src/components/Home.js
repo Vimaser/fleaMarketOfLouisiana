@@ -22,9 +22,9 @@ const Home = () => {
   const [featuredVendors, setFeaturedVendors] = useState([]);
   // const [ourVendors, setOurVendors] = useState([]);
   // const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
-  const [allVendors, setAllVendors] = useState([]); // new state for all vendors (for admin)
-  const [searchQuery, setSearchQuery] = useState(""); // State for the search query
-  const [filteredVendors, setFilteredVendors] = useState([]); // State for filtered vendor list
+  const [allVendors, setAllVendors] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredVendors, setFilteredVendors] = useState([]);
   const [selectedFeaturedVendor, setSelectedFeaturedVendor] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState("");
@@ -161,6 +161,18 @@ const Home = () => {
     }
   };
 
+  const convertTo12HourFormat = (time24) => {
+    if (!time24) {
+      return 'Time not set';
+    }
+  
+    const [hours, minutes] = time24.split(":");
+    const hours12 = (hours % 12 || 12).toString().padStart(2, "0");
+    const amPm = hours >= 12 ? "PM" : "AM";
+    return `${hours12}:${minutes} ${amPm}`;
+  };
+  
+
   return (
     <div className="home-container">
       <section className="image-section">
@@ -195,12 +207,12 @@ const Home = () => {
         </section>
 
         <section className="highlights">
-            <h2>OFFICE HOURS:</h2>
-            <ul>
-              <li>MONDAY: 9:00 AM TO 4:30 PM</li>
-              <li>THURSDAY: 9:00 AM TO 4:30 PM</li>
-              <li>FRIDAY: 9:00 AM TO 4:30 PM</li>
-            </ul>
+          <h2>OFFICE HOURS:</h2>
+          <ul>
+            <li>MONDAY: 9:00 AM TO 4:30 PM</li>
+            <li>THURSDAY: 9:00 AM TO 4:30 PM</li>
+            <li>FRIDAY: 9:00 AM TO 4:30 PM</li>
+          </ul>
         </section>
 
         {/* Upcoming Events Section */}
@@ -215,7 +227,14 @@ const Home = () => {
                   <div className="event-details">
                     <h3 className="event-title">{event.title}</h3>
                     <span className="event-date">{event.date}</span>
-                    <span className="event-time">{event.time}</span>
+                    <span className="event-time">
+                      <br/>
+                      <p>Starting: {convertTo12HourFormat(event.time)}</p>
+                    </span>
+                    <span className="event-time">
+                    <p>Ending: {convertTo12HourFormat(event.endTime)}</p>
+                      
+                    </span>
                     <p className="event-description">{event.description}</p>
                     {event.image && (
                       <img
@@ -388,8 +407,8 @@ const Home = () => {
       </>
 
       <div className="gallery-container">
-          <Gallery />
-        </div>
+        <Gallery />
+      </div>
 
       {/* Our Vendors Section */}
       {/*       <section className="our-vendors">

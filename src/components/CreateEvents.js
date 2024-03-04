@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import '../firebaseConfig';
-// import "./css/CreateEvents.css";
+// import "./css/CreateEvents.css"; I need to add this!
 
 const CreateEvents = () => {
   const [title, setTitle] = useState('');
@@ -29,6 +29,7 @@ const CreateEvents = () => {
       setDescription('');
       setDate('');
       setTime('');
+      setEndTime('');
       setLocation('');
       setImage('');
       setLink('');
