@@ -362,23 +362,36 @@ const Home = () => {
       </section> */}
 
 <>
-  <section className="featured-vendors-container">
-    <h2 className="featured-vendors-title">Featured Vendors</h2>
+  <section className="featured-vendors-container" style={{ padding: '20px' }}>
+    <h2 className="featured-vendors-title" style={{ textAlign: 'center' }}>Featured Vendors</h2>
     {featuredVendors.length === 0 ? (
       <p>No featured vendors at the moment.</p>
     ) : (
-      <ul className="vendor-list">
+      <ul className="vendor-list" style={{
+        listStyle: 'none',
+        padding: 0,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '20px'
+      }}>
         {featuredVendors.map((vendor) => (
-          <li key={vendor.id} className="vendor-item">
+          <li key={vendor.id} className="vendor-item" style={{
+            background: 'white',
+            padding: '15px',
+            borderRadius: '10px',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            marginBottom: '20px' // for mobile view stacking
+          }}>
             <strong>{vendor.name}</strong>
             {vendor.avatar && <p>{vendor.avatar}</p>}
             {vendor.images && (
-              <div className="vendor-image-container">
+              <div className="vendor-image-container" style={{ textAlign: 'center' }}>
                 <img
                   src={vendor.images}
                   alt={`${vendor.name || "Vendor"} representation`}
                   onClick={() => openModal(vendor.images)}
                   className="vendor-image"
+                  style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
                 />
               </div>
             )}
@@ -392,18 +405,38 @@ const Home = () => {
     )}
   </section>
   {modalOpen && (
-    <div className="modal">
-      <span className="close-modal" onClick={() => setModalOpen(false)}>
+    <div className="modal" style={{
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <span className="close-modal" onClick={() => setModalOpen(false)} style={{
+        position: 'absolute',
+        top: '20px',
+        right: '40px',
+        fontSize: '30px',
+        fontWeight: 'bold',
+        color: 'white',
+        cursor: 'pointer'
+      }}>
         &times;
       </span>
       <img
         src={modalImage}
         alt="Expanded view"
         className="modal-content"
+        style={{ maxWidth: '80%', maxHeight: '80%' }}
       />
     </div>
   )}
 </>
+
 
 
       <div className="gallery-container">
