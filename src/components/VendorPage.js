@@ -48,7 +48,6 @@ const VendorPage = () => {
           <p className="vendor-categories">
             Product Categories: {vendor.productCategories}
           </p>
-          {/* Additional vendor details can be added here if needed */}
         </>
       )}
     </div>

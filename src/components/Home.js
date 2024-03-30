@@ -20,8 +20,8 @@ import "./css/Events.css";
 const Home = () => {
   const [events, setEvents] = useState([]);
   const [featuredVendors, setFeaturedVendors] = useState([]);
-  // const [ourVendors, setOurVendors] = useState([]);
-  // const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
+  //const [ourVendors, setOurVendors] = useState([]);
+  //const [currentVendorIndex, setCurrentVendorIndex] = useState(0);
   const [allVendors, setAllVendors] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredVendors, setFilteredVendors] = useState([]);
@@ -163,15 +163,14 @@ const Home = () => {
 
   const convertTo12HourFormat = (time24) => {
     if (!time24) {
-      return 'Time not set';
+      return "Time not set";
     }
-  
+
     const [hours, minutes] = time24.split(":");
     const hours12 = (hours % 12 || 12).toString().padStart(2, "0");
     const amPm = hours >= 12 ? "PM" : "AM";
     return `${hours12}:${minutes} ${amPm}`;
   };
-  
 
   return (
     <div className="home-container">
@@ -228,12 +227,11 @@ const Home = () => {
                     <h3 className="event-title">{event.title}</h3>
                     <span className="event-date">{event.date}</span>
                     <span className="event-time">
-                      <br/>
+                      <br />
                       <p>Starting: {convertTo12HourFormat(event.time)}</p>
                     </span>
                     <span className="event-time">
-                    <p>Ending: {convertTo12HourFormat(event.endTime)}</p>
-                      
+                      <p>Ending: {convertTo12HourFormat(event.endTime)}</p>
                     </span>
                     <p className="event-description">{event.description}</p>
                     {event.image && (
@@ -363,65 +361,72 @@ const Home = () => {
         )}
       </section> */}
 
-      <>
-        <section className="featured-vendors-container">
-          <h2 className="featured-vendors-title">Featured Vendors</h2>
-          {featuredVendors.length === 0 ? (
-            <p>No featured vendors at the moment.</p>
-          ) : (
-            <ul className="vendor-list">
-              {featuredVendors.map((vendor) => (
-                <li key={vendor.id} className="vendor-item">
-                  <strong>{vendor.name}</strong>
-                  {vendor.avatar && <p>{vendor.avatar}</p>}
-                  {vendor.images && (
-                    <div className="vendor-image-container">
-                      <img
-                        src={vendor.images}
-                        alt={`${vendor.name || "Vendor"} representation`}
-                        onClick={() => openModal(vendor.images)}
-                        className="vendor-image"
-                      />
-                    </div>
-                  )}
-                  <p>{vendor.productCategories}</p>
-                  <p>{vendor.description}</p>
-                  {/* Add more vendor details here */}
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-        {modalOpen && (
-          <div className="modal">
-            <span className="close-modal" onClick={() => setModalOpen(false)}>
-              &times;
-            </span>
-            <img
-              src={modalImage}
-              alt="Expanded view"
-              className="modal-content"
-            />
-          </div>
-        )}
-      </>
+<>
+  <section className="featured-vendors-container">
+    <h2 className="featured-vendors-title">Featured Vendors</h2>
+    {featuredVendors.length === 0 ? (
+      <p>No featured vendors at the moment.</p>
+    ) : (
+      <ul className="vendor-list">
+        {featuredVendors.map((vendor) => (
+          <li key={vendor.id} className="vendor-item">
+            <strong>{vendor.name}</strong>
+            {vendor.avatar && <p>{vendor.avatar}</p>}
+            {vendor.images && (
+              <div className="vendor-image-container">
+                <img
+                  src={vendor.images}
+                  alt={`${vendor.name || "Vendor"} representation`}
+                  onClick={() => openModal(vendor.images)}
+                  className="vendor-image"
+                />
+              </div>
+            )}
+            <p>{vendor.productCategories}</p>
+            <p>{vendor.description}</p>
+            <p>{vendor.locationInMarket}</p>
+            <p>{vendor.lotNum}</p>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+  {modalOpen && (
+    <div className="modal">
+      <span className="close-modal" onClick={() => setModalOpen(false)}>
+        &times;
+      </span>
+      <img
+        src={modalImage}
+        alt="Expanded view"
+        className="modal-content"
+      />
+    </div>
+  )}
+</>
+
 
       <div className="gallery-container">
         <Gallery />
       </div>
 
       {/* Our Vendors Section */}
-      {/*       <section className="our-vendors">
-        <h2>Our Vendors</h2>
+   {/*    <section className="our-vendors">
+        <h2 className="vendors-title">Our Vendors</h2>
         {ourVendors.length === 0 ? (
-          <p>Check out our amazing vendors!</p>
+          <p className="vendors-intro">Check out our amazing vendors!</p>
         ) : (
-          <div>
-            <strong>{ourVendors[currentVendorIndex].name}</strong>
-            <p>{ourVendors[currentVendorIndex].avatar}</p>
-            <p>Image:</p>
+          <div className="vendor-details">
+            <strong className="vendor-name">
+              {ourVendors[currentVendorIndex].name}
+            </strong>
+            <p className="vendor-avatar">
+              {ourVendors[currentVendorIndex].avatar}
+            </p>
+            <p className="image-label">Image:</p>
             {ourVendors[currentVendorIndex].images && (
               <img
+                className="vendor-image"
                 src={ourVendors[currentVendorIndex].images}
                 alt={`${
                   ourVendors[currentVendorIndex].name || "Vendor"
@@ -430,15 +435,21 @@ const Home = () => {
               />
             )}
 
-            <p>{ourVendors[currentVendorIndex].productCategories}</p>
-            <p>{ourVendors[currentVendorIndex].description}</p>
-            <p>Location: {ourVendors[currentVendorIndex].locationInMarket}</p>
-            <p>Lot Number: {ourVendors[currentVendorIndex].lotNum}</p>
+            <p className="vendor-categories">
+              {ourVendors[currentVendorIndex].productCategories}
+            </p>
+            <p className="vendor-description">
+              {ourVendors[currentVendorIndex].description}
+            </p>
+            <p className="vendor-location">
+              Location: {ourVendors[currentVendorIndex].locationInMarket}
+            </p>
+            <p className="vendor-lot-number">
+              Lot Number: {ourVendors[currentVendorIndex].lotNum}
+            </p>
           </div>
         )}
       </section> */}
-
-      {/* Additional Sections as needed */}
     </div>
   );
 };
