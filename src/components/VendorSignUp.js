@@ -10,7 +10,7 @@ const VendorSignUp = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [productCategories, setProductCategories] = useState("");
-  const [images, setImages] = useState("");
+  //const [images, setImages] = useState("");
   const [contactInformation, setContactInformation] = useState("");
   const [locationInMarket, setLocationInMarket] = useState("");
   const [enteredPassphrase, setEnteredPassphrase] = useState("");
@@ -18,7 +18,12 @@ const VendorSignUp = () => {
   const [error, setError] = useState("");
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [LotNum, setLotNum] = useState("");
-  const [avatar, setAvatar] = useState("");
+ // const [avatar, setAvatar] = useState("");
+  const [facebookUrl, setFacebookUrl] = useState("");
+
+  const isValidFacebookUrl = (url) => {
+    return url.includes("facebook.com");
+  };
 
   const db = getFirestore();
 
@@ -49,6 +54,11 @@ const VendorSignUp = () => {
   const vendorSignUp = (e) => {
     e.preventDefault();
 
+    if (facebookUrl && !isValidFacebookUrl(facebookUrl)) {
+      setError("Invalid Facebook URL.");
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then(async (userCredential) => {
         const user = userCredential.user;
@@ -58,11 +68,10 @@ const VendorSignUp = () => {
           name,
           description,
           productCategories,
-          images,
-          avatar,
           LotNum,
           contactInformation,
           locationInMarket,
+          facebookUrl,
         };
         await setDoc(doc(db, "Vendors", user.uid), vendorProfile);
 
@@ -83,7 +92,7 @@ const VendorSignUp = () => {
           {error}
         </p>
       )}
-  
+
       {!isAuthorized ? (
         <form onSubmit={handlePassphraseSubmit} className="passphrase-form">
           <label>
@@ -134,7 +143,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-  
+
           <label className="description-label">
             Description:
             <textarea
@@ -145,7 +154,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-  
+
           <label className="product-categories-label">
             Product Categories:
             <input
@@ -157,8 +166,8 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-  
-          <div className="avatar-section">
+
+ {/*          <div className="avatar-section">
             <label className="avatar-label">Avatar:</label>
             <input
               type="text"
@@ -167,7 +176,7 @@ const VendorSignUp = () => {
               className="avatar-input"
             />
           </div>
-  
+
           <label className="images-label">
             Images (URLs):
             <input
@@ -177,8 +186,8 @@ const VendorSignUp = () => {
               className="images-input"
             />
           </label>
-          <br />
-  
+          <br /> */}
+
           <label className="contact-info-label">
             Contact Information:
             <input
@@ -190,7 +199,7 @@ const VendorSignUp = () => {
             />
           </label>
           <br />
-  
+
           <label className="location-label">
             Location in Market:
             <input
@@ -212,7 +221,17 @@ const VendorSignUp = () => {
               className="lot-number-input"
             />
           </div>
-  
+          <label className="facebook-url-label">
+            Facebook URL:
+            <input
+              type="text"
+              value={facebookUrl}
+              onChange={(e) => setFacebookUrl(e.target.value)}
+              className="facebook-url-input"
+            />
+          </label>
+          <br />
+
           <button type="submit" className="signup-btn">
             Sign Up
           </button>
@@ -220,7 +239,6 @@ const VendorSignUp = () => {
       )}
     </div>
   );
-  
 };
 
 export default VendorSignUp;

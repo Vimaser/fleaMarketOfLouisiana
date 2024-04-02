@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-} from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import useUserRole from "./useUserRole";
 import "../firebaseConfig";
 import "./css/Vendor.css";
@@ -18,7 +12,7 @@ const Vendor = () => {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
   const { vendorID } = useParams();
   const db = getFirestore();
   const userRole = useUserRole();
@@ -32,15 +26,7 @@ const Vendor = () => {
   const [images, setImages] = useState("");
   const [avatar, setAvatar] = useState("");
   const [lotNum, setLotNum] = useState("");
-  //const [imageDeleted, setImageDeleted] = useState(false);
-  const [imageUploaded, setImageUploaded] = useState(false);
-
-  // const OAuth = process.env.REACT_APP_IMGUR_CLIENT_ID;
-
-  /*   const resetUploadState = () => {
-    setImageUploaded(false);
-    setImageDeleted(false);
-  }; */
+  const [facebookUrl, setFacebookUrl] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,6 +44,7 @@ const Vendor = () => {
         setImages(vendorData.images);
         setAvatar(vendorData.avatar || "");
         setLotNum(vendorData.lotNum || "");
+        setFacebookUrl(vendorData.facebookUrl || "");
       } else {
         console.log("No such vendor!");
       }
@@ -70,198 +57,44 @@ const Vendor = () => {
     });
   }, [vendorID, db, auth]);
 
-  useEffect(() => {
-    if (images) {
-      setImageUploaded(true);
-    } else {
-      setImageUploaded(false);
-    }
-  }, [images]);
-
-  /*   const redirectToImgurOAuth = () => {
-    const clientId = process.env.REACT_APP_IMGUR_CLIENT_ID;
-    const redirectUri = encodeURIComponent(
-      "https://thefleamarketoflouisiana.com/auth-callback"
-    );
-    localStorage.setItem("vendorID", vendorID);
-    window.location.href = `https://api.imgur.com/oauth2/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}`;
-  }; */
-
-  /*   const uploadImageToImgur = async (imageFile) => {
-    const formData = new FormData();
-    formData.append("image", imageFile);
-
-    // Retrieve the access token from local storage
-    const accessToken = localStorage.getItem("access_token");
-    console.log("Access Token:", accessToken); // Log the access token to console
-
-    try {
-      const response = await fetch("https://api.imgur.com/3/image", {
-        method: "POST",
-        headers: {
-          Authorization: `Client-ID ${OAuth}`,
-        },
-        body: formData,
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        return data.data.link;
-      } else {
-        throw new Error("Failed to upload image");
-      }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
-    }
-  }; */
-
-  /*   const uploadImageToFirebase = async (imageFile) => {
-    if (imageFile) {
-      const storage = getStorage();
-      const storageRef = ref(
-        storage,
-        `vendor-images/${vendorID}/${imageFile.name}`
-      );
-
-      try {
-        // Upload the file and metadata to Firebase Storage
-        const snapshot = await uploadBytes(storageRef, imageFile);
-
-        // Get the download URL of the uploaded file
-        const downloadURL = await getDownloadURL(snapshot.ref);
-        setImages(downloadURL); // Sets the state to the URL of the uploaded image
-      } catch (error) {
-        console.error("Error uploading image to Firebase:", error);
-      }
-    }
-  }; */
-
-  const handleDeleteImage = async () => {
-    if (vendor && vendor.images) {
-      const storage = getStorage();
-      // Extract the path from the existing image URL
-      const imageUrl = vendor.images;
-      const imagePath = imageUrl
-        .replace(
-          `https://firebasestorage.googleapis.com/v0/b/${storage.app.options.storageBucket}/o/`,
-          ""
-        )
-        .split("?")[0];
-
-      // Decode the URI and create a reference to the image
-      const imageRef = ref(storage, decodeURIComponent(imagePath));
-
-      try {
-        await deleteObject(imageRef);
-        // Reset the image state
-        setImages("");
-
-        // Update Firestore to remove the image URL
-        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
-        await updateDoc(vendorRef, { images: "" });
-
-        // Display an alert, update the state, and trigger a re-render
-        alert("Image deleted successfully!");
-
-        // Update the local vendor state to reflect the deletion
-        setVendor({ ...vendor, images: "" });
-      } catch (error) {
-        console.error("Error deleting image:", error);
-        alert("Failed to delete image.");
-      }
-    }
-  };
-
   const handleImageUpload = async () => {
-    if (imageFile) {
-      if (vendor && vendor.images) {
-        alert("Please delete the existing image before uploading a new one.");
-        return;
-      }
+    if (imageFiles.length === 0) {
+      alert("Please select images to upload.");
+      return;
+    }
 
-      const storage = getStorage();
-      const newImageRef = ref(
-        storage,
-        `vendor-images/${vendorID}/${imageFile.name}`
-      );
+    if (imageFiles.length > 6) {
+      alert("You can only upload up to 6 images.");
+      return;
+    }
 
+    const storage = getStorage();
+    const imageUrls = [];
+
+    for (const file of imageFiles) {
+      const imageRef = ref(storage, `vendor-images/${vendorID}/${file.name}`);
       try {
-        const snapshot = await uploadBytes(newImageRef, imageFile);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-
-        // Update state with new image URL
-        setImages(downloadURL);
-
-        // Update the vendor object in state
-        const updatedVendor = { ...vendor, images: downloadURL };
-        setVendor(updatedVendor);
-
-        // Update Firestore with new image URL
-        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
-        await updateDoc(vendorRef, { images: downloadURL });
-
-        // Display an alert and update the state
-        alert("Image uploaded successfully!");
-        setImageUploaded(true);
+        const uploadTaskSnapshot = await uploadBytes(imageRef, file);
+        const downloadURL = await getDownloadURL(uploadTaskSnapshot.ref);
+        imageUrls.push(downloadURL);
       } catch (error) {
-        console.error("Error uploading new image:", error);
-        alert("Failed to upload image.");
+        console.error("Error uploading image:", error);
+        alert(`Failed to upload image: ${file.name}`);
       }
     }
+
+    // Update Firestore with new image URLs
+    const vendorRef = doc(getFirestore(), "Vendors", vendorID);
+    await updateDoc(vendorRef, { images: imageUrls.join(", ") });
+
+    alert("Images uploaded successfully!");
+    setImages(imageUrls.join(", "));
+    setImageFiles([]); // Clear the selected files
   };
 
-  /*   const handleImageUpload = async () => {
-    if (imageFile) {
-      const storage = getStorage();
-      const newImageRef = ref(
-        storage,
-        `vendor-images/${vendorID}/${imageFile.name}`
-      );
-
-      try {
-        if (vendor && vendor.images) {
-          const imageUrl = vendor.images;
-          const imagePath = imageUrl
-            .replace(
-              "https://firebasestorage.googleapis.com/v0/b/" +
-                storage.bucket +
-                "/o/",
-              ""
-            )
-            .split("?")[0]; // Extract the path from the URL
-
-          const oldImageRef = ref(storage, decodeURIComponent(imagePath));
-          try {
-            await deleteObject(oldImageRef);
-          } catch (error) {
-            console.error("Error deleting old image:", error);
-          }
-        }
-
-        // Upload the new image
-        const snapshot = await uploadBytes(newImageRef, imageFile);
-        const downloadURL = await getDownloadURL(snapshot.ref);
-
-        setImages(downloadURL); // Update state with new image URL
-
-        // Update Firestore with new image URL
-        const vendorRef = doc(getFirestore(), "Vendors", vendorID);
-        await updateDoc(vendorRef, { images: downloadURL });
-      } catch (error) {
-        console.error("Error uploading new image:", error);
-      }
-    }
-  }; */
-
-  /*   const handleImageUpload = async () => {
-    if (imageFile) {
-      const uploadedImageUrl = await uploadImageToImgur(imageFile);
-      if (uploadedImageUrl) {
-        setImages(uploadedImageUrl);
-      }
-    }
-  }; */
+  const handleFileChange = (event) => {
+    setImageFiles(Array.from(event.target.files).slice(0, 6));
+  };
 
   const updateVendor = async (e) => {
     e.preventDefault();
@@ -276,6 +109,7 @@ const Vendor = () => {
         images,
         avatar,
         lotNum,
+        facebookUrl,
       };
       await updateDoc(vendorRef, updatedData);
       setVendor(updatedData);
@@ -293,7 +127,11 @@ const Vendor = () => {
         <>
           <div className="vendor-profile">
             <h2 className="vendor-name">{vendor.name}</h2>
-            <p className="vendor-avatar">External Hosting: {vendor.avatar}</p>
+            {vendor.avatar && (
+              <p className="vendor-avatar">
+                <img src={vendor.avatar} alt="Avatar" />
+              </p>
+            )}
             <p className="vendor-description">{vendor.description}</p>
             <p className="vendor-contact">
               Contact Info: {vendor.contactInformation}
@@ -304,30 +142,50 @@ const Vendor = () => {
             <p className="vendor-categories">
               Categories: {vendor.productCategories}
             </p>
-            <p className="vendor-id">ID: {vendor.vendorID}</p>
             {vendor.images && (
               <div className="vendor-images">
-                <img
-                  src={vendor.images}
-                  alt={`${vendor.name}'s upload`}
-                  className="vendor-image"
-                />
+                {vendor.images.split(", ").map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`Vendor content ${index + 1}`}
+                    style={{
+                      maxWidth: "100px",
+                      maxHeight: "100px",
+                      marginRight: "10px",
+                    }}
+                  />
+                ))}
               </div>
             )}
             <p className="vendor-lot-number">Lot Number: {vendor.lotNum}</p>
+            {vendor.facebookUrl && (
+              <p className="vendor-facebook-url">
+                <a
+                  href={vendor.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {vendor.facebookUrl}
+                </a>
+              </p>
+            )}
+            <p className="vendor-page-link">
+              <Link to={`/vendorpage/${vendorID}`}>View My Vendor Page</Link>
+            </p>
+            {(currentUser?.uid === vendorID || userRole === "Admin") && (
+              <button
+                onClick={() => setEditMode(true)}
+                className="edit-vendor-button"
+              >
+                Edit Profile
+              </button>
+            )}
           </div>
-          {(currentUser && currentUser.uid === vendorID) ||
-          userRole === "Admin" ? (
-            <button
-              onClick={() => setEditMode(true)}
-              className="edit-vendor-button"
-            >
-              Edit
-            </button>
-          ) : null}
         </>
       ) : (
         <form onSubmit={updateVendor} className="edit-vendor-form">
+          {/* Form fields for editing vendor information */}
           <label className="vendor-label">
             Name:
             <input
@@ -372,47 +230,36 @@ const Vendor = () => {
               className="vendor-input"
             />
           </label>
-          {/* Additional form fields and logic for Admin to handle images */}
-          {(userRole === "Admin" || userRole === "vendor") &&
-            (vendor.images ? (
-              <>
-                <p>Current Image:</p>
-                <img
-                  src={vendor.images}
-                  alt="Current upload"
-                  style={{ maxWidth: "100%", height: "auto" }}
+          {(userRole === "Admin" || currentUser?.uid === vendorID) && (
+            <>
+              <label className="vendor-label">
+                Images (max 6):
+                <input
+                  type="file"
+                  multiple
+                  onChange={handleFileChange}
+                  className="vendor-file-input"
                 />
-                <button type="button" onClick={handleDeleteImage}>
-                  Delete Image
-                </button>
-                <p>
-                  Please delete the existing image before uploading a new one.
-                </p>
-              </>
-            ) : (
-              <>
-                <p>
-                  You can upload one image. For more images, use External
-                  Hosting.
-                </p>
-                <label>
-                  Image Upload:
-                  <input
-                    type="file"
-                    onChange={(e) => setImageFile(e.target.files[0])}
+              </label>
+              <button
+                type="button"
+                onClick={handleImageUpload}
+                className="vendor-upload-button"
+              >
+                Upload Images
+              </button>
+              <div className="image-preview-container">
+                {imageFiles.map((file, index) => (
+                  <img
+                    key={index}
+                    src={URL.createObjectURL(file)}
+                    alt={`Preview ${index}`}
+                    className="image-preview"
                   />
-                </label>
-                {imageUploaded ? (
-                  <p>Image uploaded successfully!</p>
-                ) : (
-                  <button type="button" onClick={handleImageUpload}>
-                    Upload Image to Firebase
-                  </button>
-                )}
-              </>
-            ))}
-          <br />
-
+                ))}
+              </div>
+            </>
+          )}
           <label className="vendor-label">
             Lot Number:
             <input
@@ -422,9 +269,18 @@ const Vendor = () => {
               className="vendor-input"
             />
           </label>
+          <label className="vendor-label">
+            Facebook URL:
+            <input
+              type="text"
+              value={facebookUrl}
+              onChange={(e) => setFacebookUrl(e.target.value)}
+              className="vendor-input"
+            />
+          </label>
           <div className="vendor-form-actions">
-            <button type="submit" className="vendor-update-button">
-              Update
+            <button type="submit" className="vendor-save-button">
+              Save Changes
             </button>
             <button
               onClick={() => setEditMode(false)}

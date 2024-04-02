@@ -86,7 +86,6 @@ const Gallery = () => {
 
   return (
     <div className="gallery-container">
-      <h2 className="gallery-header">Image Gallery</h2>
       {images.map((image, index) => (
         <div key={index} className="photo-box" onClick={() => openModal(image.url)}>
           <img src={image.url} alt={`Gallery item ${index + 1}`} />

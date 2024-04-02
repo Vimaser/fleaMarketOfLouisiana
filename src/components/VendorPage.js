@@ -12,15 +12,21 @@ const VendorPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const vendorRef = doc(db, "Vendors", vendorID);
-      const vendorSnap = await getDoc(vendorRef);
+      setLoading(true);
+      try {
+        const vendorRef = doc(db, "Vendors", vendorID);
+        const vendorSnap = await getDoc(vendorRef);
 
-      if (vendorSnap.exists()) {
-        setVendor(vendorSnap.data());
-      } else {
-        console.log("No such vendor!");
+        if (vendorSnap.exists()) {
+          setVendor(vendorSnap.data());
+        } else {
+          console.log("No such vendor!");
+        }
+      } catch (error) {
+        console.error("Error fetching vendor data:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchData();
@@ -34,13 +40,17 @@ const VendorPage = () => {
         <>
           <h2 className="vendor-name">{vendor.name}</h2>
           <p className="vendor-description">{vendor.description}</p>
-
           {vendor.images && (
-            <img
-              className="vendor-image"
-              src={vendor.images}
-              alt={`Vendor ${vendor.name}`}
-            />
+            <div className="vendor-images">
+              {vendor.images.split(", ").map((img, index) => (
+                <img
+                  key={index}
+                  className="vendor-image"
+                  src={img}
+                  alt={`Vendor content ${index + 1}`}
+                />
+              ))}
+            </div>
           )}
           <p className="vendor-location">
             Location in Market: {vendor.locationInMarket}
@@ -48,6 +58,24 @@ const VendorPage = () => {
           <p className="vendor-categories">
             Product Categories: {vendor.productCategories}
           </p>
+          {vendor.facebookUrl && (
+            <iframe
+              src={`https://www.facebook.com/plugins/page.php?href=${encodeURIComponent(vendor.facebookUrl)}&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId`}
+              width="340"
+              height="500"
+              style={{ border: "none", overflow: "hidden" }}
+              scrolling="no"
+              frameBorder="0"
+              allowFullScreen={true}
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              title="Vendor's Facebook Page"
+            ></iframe>
+          )}
+          {vendor.facebookUrl && (
+            <p className="facebook-link">
+              Visit Us on Facebook: <a href={vendor.facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a>
+            </p>
+          )}
         </>
       )}
     </div>

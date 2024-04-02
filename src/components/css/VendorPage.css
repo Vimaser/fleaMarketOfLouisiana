@@ -9,37 +9,59 @@
   text-align: center;
   font-weight: bold;
   margin-bottom: 20px;
+  font-size: 2rem;
 }
 
 .vendor-description, .vendor-location, .vendor-categories {
+  background-color: white;
+  padding: 10px;
   margin-bottom: 15px;
+  border-radius: 5px;
+  text-align: center;
   line-height: 1.6;
 }
 
-.vendor-image {
-  display: block;
-  margin: 0 auto 20px;
-  max-width: 100%;
-  height: auto;
+.facebook-embed-container {
+  width: 340px;
+  height: 500px;
+  margin: 20px auto;
+  border: none; 
+  overflow: hidden;
 }
 
-/* Responsive adjustments for mobile devices */
-@media (max-width: 768px) {
-  .vendor-name {
-    font-size: 1.5rem;
-  }
+.card {
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
 
-  .vendor-description, .vendor-location, .vendor-categories {
-    font-size: 1rem; /* Adjust paragraph size for readability on small screens */
+.vendor-images-container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.vendor-image {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  max-width: 100px;
+  height: auto;
+  margin: 5px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@media (max-width: 768px) {
+  .vendor-image {
+    max-width: 80px; /* Smaller images on smaller screens */
   }
 }
 
 @media (max-width: 480px) {
-  .vendor-name {
-    font-size: 1.3rem; /* Smaller heading size for very small screens */
-  }
-
-  .vendor-description, .vendor-location, .vendor-categories {
-    font-size: 0.9rem; /* Smaller paragraph size for very small screens */
+  .vendor-image {
+    max-width: 60px; /* Even smaller images on very small screens */
   }
 }

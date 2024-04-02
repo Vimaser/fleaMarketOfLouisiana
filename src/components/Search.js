@@ -68,14 +68,15 @@ const Search = () => {
             <div key={vendor.id} className="vendor-info">
               <Link to={`/vendorpage/${vendor.id}`} className="vendor-link">
                 <h3 className="vendor-name">{vendor.name}</h3>
-
+                
                 {vendor.images && (
-                  <img
-                    src={vendor.images}
-                    alt={`Vendor ${vendor.name}`}
-                    className="vendor-image"
-                  />
+                  <div className="vendor-images-container">
+                    {vendor.images.split(", ").map((img, index) => (
+                      <img key={index} src={img} alt={`Content from ${vendor.name} ${index + 1}`} className="vendor-image" />
+                    ))}
+                  </div>
                 )}
+
                 <p className="vendor-description">
                   Description: {vendor.description}
                 </p>

@@ -26,6 +26,7 @@ import {
   FAQs,
   AdminPortal,
   Vendor,
+  VendorPage,
   VendorSignUp,
   VendorLogin,
   Events,
@@ -34,7 +35,6 @@ import {
   GoogleMap,
   Map,
   Search,
-  VendorPage,
   FacebookPageEmbed,
   Gallery,
   Header,
@@ -67,8 +67,9 @@ function App() {
             />
             <Route path="/FAQs" element={<FAQs />} />
             <Route path="/VendorSignUp" element={<VendorSignUp />} />
-            <Route path="/VendorLogin" element={<VendorLogin />} />
+            <Route path="/vendorpage/:vendorID" element={<VendorPage />} />
             <Route path="/Vendor/:vendorID" element={<Vendor />} />
+            <Route path="/VendorLogin" element={<VendorLogin />} />
             <Route path="/editservice/:serviceId" element={<EditServices />} />
             <Route path="/editblog/:blogId" element={<EditBlog />} />
             <Route path="/createblog" element={<CreateBlog />} />
@@ -84,10 +85,10 @@ function App() {
             <Route path="/createevents" element={<CreateEvents />} />
             <Route path="/events" element={<Events />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/vendorpage/:vendorID" element={<VendorPage />} />
             <Route path="/adminportal" element={<AdminPortal />} />
             <Route path="/createservices" element={<CreateServices />} />
-            <Route path="/Gallery" element={<Gallery />} />
+            <Route path="/gallery/:vendorID" element={<Gallery />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route path="/fleamarketmap" element={<FleaMarketMap />} />
             <Route path="/facebookpageembed" element={<FacebookPageEmbed />} />
           </Routes>
