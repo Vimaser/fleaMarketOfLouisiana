@@ -209,6 +209,8 @@ const Home = () => {
           <h2>OFFICE HOURS:</h2>
           <ul>
             <li>MONDAY: 9:00 AM TO 4:30 PM</li>
+            <li>TUESDAY: 10:00 AM TO 3:00 PM</li>
+            <li>WEDNESDAY: 10:00 AM TO 3:00 PM</li>
             <li>THURSDAY: 9:00 AM TO 4:30 PM</li>
             <li>FRIDAY: 9:00 AM TO 4:30 PM</li>
           </ul>
@@ -387,9 +389,9 @@ const Home = () => {
             {vendor.images && (
               <div className="vendor-image-container" style={{ textAlign: 'center' }}>
                 <img
-                  src={vendor.images}
+                  src={vendor.images[0]} // Displaying only the first image
                   alt={`${vendor.name || "Vendor"} representation`}
-                  onClick={() => openModal(vendor.images)}
+                  onClick={() => openModal(vendor.images[0])} // Passing only the first image to openModal
                   className="vendor-image"
                   style={{ width: '100%', height: 'auto', cursor: 'pointer' }}
                 />
@@ -436,6 +438,7 @@ const Home = () => {
     </div>
   )}
 </>
+
 
 
 
