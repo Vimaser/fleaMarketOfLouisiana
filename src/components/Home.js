@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../firebaseConfig";
 import useUserRole from "./useUserRole";
 import img from "../img/fleabro-4.gif";
@@ -35,13 +36,10 @@ const Home = () => {
   const db = getFirestore();
   const storage = getStorage();
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const eventsCollection = collection(db, "events");
-      const eventsSnapshot = await getDocs(eventsCollection);
-      setEvents(eventsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-
+  const fetchFeaturedVendors = useCallback(async () => {
+    try {
       const vendorsCollection = collection(db, "Vendors");
       const vendorsSnapshot = await getDocs(vendorsCollection);
       const allVendors = vendorsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -50,27 +48,56 @@ const Home = () => {
       // Fetch image URLs for featured vendors
       const featuredVendorsWithImages = await Promise.all(
         featuredVendors.map(async (vendor) => {
-          const vendorImageRef = ref(storage, `vendor-images/${vendor.id}`);
-          const vendorImages = await listAll(vendorImageRef);
-          const imageUrls = await Promise.all(vendorImages.items.map(itemRef => getDownloadURL(itemRef)));
-          return { ...vendor, imageUrls };
+          try {
+            const vendorImageRef = ref(storage, `vendor-images/${vendor.id}`);
+            const vendorImages = await listAll(vendorImageRef);
+            const imageUrls = await Promise.all(vendorImages.items.map(itemRef => getDownloadURL(itemRef)));
+            return { ...vendor, imageUrls };
+          } catch (error) {
+            console.error(`Error fetching images for vendor ${vendor.id}:`, error);
+            return { ...vendor, imageUrls: [] };
+          }
         })
       );
 
       setFeaturedVendors(featuredVendorsWithImages);
-    };
+    } catch (error) {
+      console.error("Error fetching featured vendors:", error);
+    }
+  }, [db, storage]);
 
-    const fetchAllVendors = async () => {
+  const fetchData = useCallback(async () => {
+    try {
+      const eventsCollection = collection(db, "events");
+      const eventsSnapshot = await getDocs(eventsCollection);
+      setEvents(eventsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+
+      await fetchFeaturedVendors();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [db, fetchFeaturedVendors]);
+
+  const fetchAllVendors = useCallback(async () => {
+    try {
       const vendorsCollection = collection(db, "Vendors");
       const vendorsSnapshot = await getDocs(vendorsCollection);
       setAllVendors(vendorsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    };
-
-    fetchData();
-    if (userRole === "Admin") {
-      fetchAllVendors();
+    } catch (error) {
+      console.error("Error fetching all vendors:", error);
     }
-  }, [userRole, db, storage]);
+  }, [db]);
+
+  useEffect(() => {
+    fetchData();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user && userRole === "Admin") {
+        fetchAllVendors();
+      }
+    });
+
+    return () => unsubscribe();
+  }, [auth, fetchAllVendors, fetchData, userRole]);
 
   useEffect(() => {
     const filteredVendors = allVendors.filter((vendor) => {
@@ -94,7 +121,6 @@ const Home = () => {
   const deleteEvent = async (eventId) => {
     if (userRole === "Admin") {
       try {
-        const db = getFirestore();
         await deleteDoc(doc(db, "events", eventId));
         setEvents(events.filter((event) => event.id !== eventId));
       } catch (error) {
@@ -109,7 +135,6 @@ const Home = () => {
   const updateVendorFeaturedStatus = async (vendorId, isFeatured) => {
     if (userRole === "Admin" && vendorId) {
       try {
-        const db = getFirestore();
         const vendorRef = doc(db, "Vendors", vendorId);
         await updateDoc(vendorRef, { featured: isFeatured });
 
