@@ -7,6 +7,8 @@ import "./css/VendorPage.css";
 const VendorPage = () => {
   const [vendor, setVendor] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
   const { vendorID } = useParams();
   const db = getFirestore();
 
@@ -32,6 +34,11 @@ const VendorPage = () => {
     fetchData();
   }, [vendorID, db]);
 
+  const openModal = (imageUrl) => {
+    setModalImage(imageUrl);
+    setModalOpen(true);
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -48,6 +55,8 @@ const VendorPage = () => {
                   className="vendor-image"
                   src={img}
                   alt={`Vendor content ${index + 1}`}
+                  onClick={() => openModal(img)}
+                  style={{ width: "150px", height: "auto", cursor: "pointer" }}
                 />
               ))}
             </div>
@@ -77,6 +86,38 @@ const VendorPage = () => {
             </p>
           )}
         </>
+      )}
+
+      {modalOpen && (
+        <div className="modal" style={{
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <span className="close-modal" onClick={() => setModalOpen(false)} style={{
+            position: 'absolute',
+            top: '20px',
+            right: '40px',
+            fontSize: '30px',
+            fontWeight: 'bold',
+            color: 'white',
+            cursor: 'pointer'
+          }}>
+            &times;
+          </span>
+          <img
+            src={modalImage}
+            alt="Expanded view"
+            className="modal-content"
+            style={{ maxWidth: '80%', maxHeight: '80%' }}
+          />
+        </div>
       )}
     </div>
   );

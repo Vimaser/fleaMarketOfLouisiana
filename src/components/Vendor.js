@@ -13,6 +13,8 @@ const Vendor = () => {
   const [loading, setLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [imageFiles, setImageFiles] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalImage, setModalImage] = useState("");
   const { vendorID } = useParams();
   const db = getFirestore();
   const userRole = useUserRole();
@@ -119,6 +121,11 @@ const Vendor = () => {
     }
   };
 
+  const openModal = (imageUrl) => {
+    setModalImage(imageUrl);
+    setModalOpen(true);
+  };
+
   if (loading) return <div>Loading...</div>;
 
   return (
@@ -149,10 +156,12 @@ const Vendor = () => {
                     key={index}
                     src={img}
                     alt={`Vendor content ${index + 1}`}
+                    onClick={() => openModal(img)}
                     style={{
                       maxWidth: "100px",
                       maxHeight: "100px",
                       marginRight: "10px",
+                      cursor: "pointer",
                     }}
                   />
                 ))}
@@ -290,6 +299,38 @@ const Vendor = () => {
             </button>
           </div>
         </form>
+      )}
+
+      {modalOpen && (
+        <div className="modal" style={{
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <span className="close-modal" onClick={() => setModalOpen(false)} style={{
+            position: 'absolute',
+            top: '20px',
+            right: '40px',
+            fontSize: '30px',
+            fontWeight: 'bold',
+            color: 'white',
+            cursor: 'pointer'
+          }}>
+            &times;
+          </span>
+          <img
+            src={modalImage}
+            alt="Expanded view"
+            className="modal-content"
+            style={{ maxWidth: '80%', maxHeight: '80%' }}
+          />
+        </div>
       )}
     </div>
   );
